@@ -5,14 +5,14 @@
     xmlns:local="using:CountDownApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Width="1462">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="324*"></RowDefinition>
-            <RowDefinition Height="485*"></RowDefinition>
-            <RowDefinition Height="271*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -25,31 +25,33 @@
                 Content="Vowels" 
                 Grid.Column="1" 
                 HorizontalAlignment="Left"
-                Margin="56,39,0,0" 
+                Margin="56,175,0,0" 
                 Grid.Row="2" 
                 VerticalAlignment="Top" 
-                Height="62" Width="248" FontSize="33.333" Click="btnVowels_Click"/>
+                Height="62" Width="200" FontSize="33.333" Click="btnVowels_Click"/>
 
 
         <Button x:Name="btnConsonants" 
                 Content="Consonants" 
                 Grid.Column="1" 
                 HorizontalAlignment="Left" 
-                Margin="56,144,0,0" Grid.Row="2"
+                Margin="56,64,0,0" Grid.Row="2"
                 VerticalAlignment="Top" 
-                Height="62" Width="248" FontSize="33.333" Click="btnConsonants_Click"/>
+                Height="58" Width="200" FontSize="33.333" Click="btnConsonants_Click"/>
 
-        <Grid Grid.Column="1" HorizontalAlignment="Left" Height="167" Margin="388,39,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1192" RenderTransformOrigin="0.5,0.5">
-            <TextBox x:Name="textBox1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="10,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="140,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="274,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="412,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="542,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="680,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox7" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="810,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox8" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="938,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox9" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="1077,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
+        <Grid x:Name="LettersGrid"  Grid.Column="1" HorizontalAlignment="Left" Height="88" Margin="280,50,0,0" Grid.Row="2" VerticalAlignment="Top" Width="791">
+            <TextBox x:Name="textBox0" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="10,10,0,0"  Height="65" Width="27" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="96,10,0,0"  Height="65" Width="24" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox2" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="184,10,0,0" Height="65" Width="25" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox3" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="276,10,0,0" Height="65" Width="34" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox4" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="364,10,0,0" Height="65" Width="39" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox5" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="456,10,0,0" Height="65" Width="35" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox6" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="542,10,0,0" Height="65" Width="37" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox7" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="630,10,0,0" Height="65" Width="25" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox8" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="717,10,0,0" Height="65" Width="48" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
         </Grid>
+        <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Left" Margin="280,175,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="581" Height="62" AcceptsReturn="True" FontSize="26.667" TextAlignment="Center"/>
+        <Button x:Name="btnCheckWord" Content="Enter" Grid.Column="1" HorizontalAlignment="Left" Margin="913,175,0,0" Grid.Row="2" VerticalAlignment="Top" Height="62" Width="150" Click="btnCheckWord_Click" FontSize="33.333"/>
 
     </Grid>
 </Page>
