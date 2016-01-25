@@ -6,50 +6,107 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle RadiusY="15.833" RadiusX="15.833" Stroke="Black" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0,-1,0,5"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="324*"></RowDefinition>
-            <RowDefinition Height="485*"></RowDefinition>
-            <RowDefinition Height="271*"></RowDefinition>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".5*"></ColumnDefinition>
-            <ColumnDefinition Width="9*"></ColumnDefinition>
-            <ColumnDefinition Width=".5*"></ColumnDefinition>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width=".5*"/>
         </Grid.ColumnDefinitions>
 
         <Button x:Name="btnVowels" 
                 Content="Vowels" 
                 Grid.Column="1" 
                 HorizontalAlignment="Left"
-                Margin="56,39,0,0" 
+                Margin="357,161,0,0" 
                 Grid.Row="2" 
                 VerticalAlignment="Top" 
-                Height="62" Width="248" FontSize="33.333" Click="btnVowels_Click"/>
+                Height="62" Width="200" FontSize="33.333" Click="btnVowels_Click" Background="White"/>
 
 
+        <Grid x:Name="LettersGrid"  Grid.Column="1" HorizontalAlignment="Left" Height="88" Margin="581,36,0,0" Grid.Row="2" VerticalAlignment="Top" Width="791">
+            <TextBox x:Name="textBox0" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="10,10,0,0"  Height="65" Width="27" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox1" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="96,10,0,0"  Height="65" Width="24" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox2" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="184,10,0,0" Height="65" Width="25" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox3" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="276,10,0,0" Height="65" Width="34" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox4" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="364,10,0,0" Height="65" Width="39" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox5" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="456,10,0,0" Height="65" Width="35" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox6" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="542,10,0,0" Height="65" Width="37" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox7" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="630,10,0,0" Height="65" Width="25" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+            <TextBox x:Name="textBox8" HorizontalAlignment="Left" Text="" VerticalAlignment="Top" Margin="717,10,0,0" Height="65" Width="48" IsReadOnly="True" FontSize="40" InputScope="Text" TextAlignment="Center"/>
+        </Grid>
+        <TextBox x:Name="txtBoxUsrWord" Grid.Column="1" HorizontalAlignment="Left" Margin="591,161,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="563" Height="62" AcceptsReturn="True" FontSize="26.667" TextAlignment="Center"/>
+        <Button x:Name="btnCheckWord" Content="Enter" Grid.Column="1" HorizontalAlignment="Left" Margin="1216,161,0,0" Grid.Row="2" VerticalAlignment="Top" Height="62" Width="150" Click="btnCheckWord_Click" FontSize="33.333" Visibility="Collapsed"/>
         <Button x:Name="btnConsonants" 
-                Content="Consonants" 
                 Grid.Column="1" 
                 HorizontalAlignment="Left" 
-                Margin="56,144,0,0" Grid.Row="2"
+                Margin="357,50,0,0" Grid.Row="2"
                 VerticalAlignment="Top" 
-                Height="62" Width="248" FontSize="33.333" Click="btnConsonants_Click"/>
-
-        <Grid Grid.Column="1" HorizontalAlignment="Left" Height="167" Margin="388,39,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1192" RenderTransformOrigin="0.5,0.5">
-            <TextBox x:Name="textBox1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="10,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="140,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="274,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="412,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="542,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox6" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="680,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox7" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="810,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox8" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="938,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-            <TextBox x:Name="textBox9" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="1077,40,0,0" Height="97" Width="105" IsReadOnly="True" AcceptsReturn="True" FontSize="20" InputScope="Text" TextAlignment="Center"/>
-        </Grid>
+                Height="58" Width="200" FontSize="33.333" Click="btnConsonants_Click" Background="{x:Null}" Content="Consonants" Style="{StaticResource ButtonStyle1}"/>
 
     </Grid>
 </Page>
