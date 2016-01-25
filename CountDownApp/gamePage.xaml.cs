@@ -14,24 +14,23 @@ namespace CountDownApp
         private char[] _vowlesArray = new char[5] { 'A', 'E', 'I', 'O', 'U'};
         private char[] _consonantsArray = new char[21] { 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R' , 'S', 'T', 'V', 'W', 'X', 'Y', 'Z'};
 
-        List<TextBox> textboxes = new List<TextBox>();
         TextBox[] _textboxeArray = new TextBox [9];
 
         private int _rndNum = 0 , _textBoxLoc = 0;
-        private char _curChar;
 
 
         public gamePage()
         {
             this.InitializeComponent();
 
-            fillTextBoxList();
+            getTextBoxList();
         }
 
 
-        private void fillTextBoxList()
+        //gets the amount of textboxes from gamePage and puts them into a list
+        private void getTextBoxList()
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < _textboxeArray.Length; i++)
             {
                 _textboxeArray[i] = ((TextBox)LettersGrid.FindName("textBox" + i.ToString()));
             }
@@ -45,7 +44,7 @@ namespace CountDownApp
         */
         private void btnVowels_Click(object sender, RoutedEventArgs e)
         {
-            _rndNum = rndNumGenerator(_vowlesArray.Length);
+            _rndNum = rndNumGen(_vowlesArray.Length);
             sendCharToTextBox((Char)_vowlesArray.GetValue(_rndNum));
         }
 
@@ -56,7 +55,7 @@ namespace CountDownApp
         */
         private void btnConsonants_Click(object sender, RoutedEventArgs e)
         {         
-            _rndNum = rndNumGenerator(_consonantsArray.Length);
+            _rndNum = rndNumGen(_consonantsArray.Length);
             sendCharToTextBox((Char)_consonantsArray.GetValue(_rndNum));
         }
 
@@ -68,10 +67,13 @@ namespace CountDownApp
         {
             _textboxeArray[_textBoxLoc].Text = _letter.ToString();
 
-            if (_textBoxLoc == 8){
+            if (_textBoxLoc == _textboxeArray.Length-1)
+            {
                 _textBoxLoc = 0;
                 btnVowels.Visibility = Visibility.Collapsed;
                 btnConsonants.Visibility = Visibility.Collapsed;
+
+                btnCheckWord.Visibility = Visibility.Visible;
             }         
             else
                 _textBoxLoc++;
@@ -80,7 +82,7 @@ namespace CountDownApp
         /*
         Generates a number between 0 and the number passed in
         */
-        private int rndNumGenerator(int maxNo)
+        private int rndNumGen(int maxNo)
         {
             var r = new Random();
             int   num = r.Next(maxNo);
@@ -89,13 +91,26 @@ namespace CountDownApp
 
         private void btnCheckWord_Click(object sender, RoutedEventArgs e)
         {
+            //Check that the Word is using the same letters Displayed
+
+
+            validateUserWord();
+
+
             resetGame();
         }
 
         private void validateUserWord()
         {
-            //GET THE USERS INPUT
-            //COMPARE THAT AGAINST A DICTONARY TEXT FILE
+            //Searches the _wordsList for the word entered by the user and gives its index
+            int i = App._wordsList.BinarySearch(txtBoxUsrWord.Text);
+
+            //if the word is found in _wordsList
+            if (i >= 0)
+            {
+                //Correct WordEntered
+            }
+
             //IF THE WORD IS CORRECT, GET THE "WORDS LENGTH" AND ADD THAT TO THERE SCORE
         }
 
@@ -106,10 +121,17 @@ namespace CountDownApp
         {
             btnVowels.Visibility = Visibility.Visible;
             btnConsonants.Visibility = Visibility.Visible;
+
+            txtBoxUsrWord.Text = "";
+
+            btnCheckWord.Visibility = Visibility.Collapsed;
+
+            //Reset all the textboxes to have nothing in them
             foreach (TextBox t in _textboxeArray) {
                 _textboxeArray[_textBoxLoc++].Text = "";
             }
             _textBoxLoc = 0;
         }
+
     }
 }

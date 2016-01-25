@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,6 +25,11 @@ namespace CountDownApp
     /// </summary>
     sealed partial class App : Application
     {
+        public static bool check { get; private set; }
+        public static List<string> _wordsList { get; private set; } = new List<string>();
+
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -35,9 +43,36 @@ namespace CountDownApp
             this.Suspending += OnSuspending;
         }
 
+        //reads from the file line by line into a List<String>
+        private static async void ReadFromFile()
+        {
+            StorageFile _file = await StorageFile.GetFileFromApplicationUriAsync(new System.Uri(@"ms-appx:///Files/words.txt"));
+
+            using (StreamReader reader = new StreamReader(await _file.OpenStreamForReadAsync()))
+            {
+                string _line;
+                while ((_line = reader.ReadLine()) != null)
+                {
+                    _wordsList.Add(_line); // Add to list line by line
+                }
+            }
+            check = true;//check its all read in and finished
+        }//end
+
+        public static async void load()
+        {
+            //w8 till ReadFromFile() is finished
+            await Task.Run(() => ReadFromFile());
+        }//load
+
+
+
+
+
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
+        /// will be used such as when the application is launched to open a specific _file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)

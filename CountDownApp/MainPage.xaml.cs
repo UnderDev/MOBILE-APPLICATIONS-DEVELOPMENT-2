@@ -25,6 +25,13 @@ namespace CountDownApp
         public MainPage()
         {
             this.InitializeComponent();
+
+            //load all the words into _ListOfWords
+            App.load();
+
+            while (App.check == false)
+            {
+            }
         }
 
         private void btnSinglePlayer_Click(object sender, RoutedEventArgs e)
