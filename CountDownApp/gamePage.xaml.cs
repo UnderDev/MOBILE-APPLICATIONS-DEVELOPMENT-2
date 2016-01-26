@@ -34,7 +34,7 @@ namespace CountDownApp
         {
             for (int i = 0; i < _textboxArray.Length; i++)
             {
-                _textboxArray[i] = ((TextBox)LettersGrid.FindName("textBox" + i.ToString()));
+                _textboxArray[i] = ((TextBox)stkPanContiners.FindName("txtLetterBox" + i.ToString()));
             }
         }
 
@@ -77,6 +77,7 @@ namespace CountDownApp
                 _textBoxLoc = 0;
                 btnVowels.Visibility = Visibility.Collapsed;
                 btnConsonants.Visibility = Visibility.Collapsed;
+                txtBoxUsrWord.Visibility = Visibility.Visible;
 
                 btnCheckWord.Visibility = Visibility.Visible;
             }         
@@ -91,25 +92,30 @@ namespace CountDownApp
         */
         private int rndNumGen(int maxNo)
         {
-            var r = new Random();
+             Random r = new Random();
             int   num = r.Next(maxNo);
             return num;
         }
 
         private void btnCheckWord_Click(object sender, RoutedEventArgs e)
         {
-            chkLettersValidity();
-
-
+            if (chkLettersValidity())
+            {
+                chkWordValidity();
+            }
+            else
+            {
+                //Display a message to the user that its an INVALID WORD based on the givn letters
+            }
 
 
             //RESET AFTER THE GAMES OVER
             resetGame();
         }
 
-        //Check that the letters entered by the user(converted to uppercase) are the letters that were displayed
-        //and that there are no duplicate letters used by the user when not available 
-        private void chkLettersValidity()
+        /*Check that the letters entered by the user(converted to uppercase) are the letters that were displayed
+        and that there are no duplicate letters used by the user when not available */
+        private Boolean chkLettersValidity()
         {
             Boolean _validLetters = true;
             String _toUpper;
@@ -135,34 +141,36 @@ namespace CountDownApp
                 else
                     _listAvailLetters.RemoveAt(_leterIndex);
             }
-
-            if (_validLetters == true)
-            {
-                //Letters are valid 
-                chkWordValidity();
-            }
-            else {
-                //Letters are NOT valid 
-            }
+            return _validLetters;
         }
 
         private void chkWordValidity()
         {
-            //Searches the _wordsList for the word entered by the user and gives its index
-            int i = App._wordsList.BinarySearch(txtBoxUsrWord.Text);
+            //Searches the _wordsList for the word entered by the user(To lowercase) and gives its index
+            int _index = App._wordsList.BinarySearch(txtBoxUsrWord.Text.ToLower());
 
             //if the word is found in _wordsList
-            if (i >= 0)
+            if (_index >= 0)
             {
-                //Correct WordEntered
-            }
+                //Gets the words length and adds it to the users Score
+                App._userScore = txtBoxUsrWord.Text.Length;
 
-            //IF THE WORD IS CORRECT, GET THE "WORDS LENGTH" AND ADD THAT TO THERE SCORE
+                stkPnlScoreBoard.Visibility = Visibility.Visible;
+                txtBlockUsrScore.Text += ("    "+txtBoxUsrWord.Text+" \t\t"+ App._userScore +"\n");
+            }
         }
 
-
-
-
+        /*
+        TextBox Checks all input from the keyboard to see if the user hit Enter key, if they did call the 
+        btnCheckWord_Click button
+        */
+        private void txtBoxUsrWord_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                btnCheckWord_Click(sender,e);
+            }
+        }
 
         /*
         Resets the games: Buttons, and emptys the textboxes containing letters
@@ -175,6 +183,7 @@ namespace CountDownApp
             txtBoxUsrWord.Text = "";
 
             btnCheckWord.Visibility = Visibility.Collapsed;
+            txtBoxUsrWord.Visibility = Visibility.Collapsed;
 
             //Reset all the textboxes to have nothing in them
             foreach (TextBox t in _textboxArray) {

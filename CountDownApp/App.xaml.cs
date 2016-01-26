@@ -28,6 +28,7 @@ namespace CountDownApp
         public static bool check { get; private set; }
         public static List<string> _wordsList { get; private set; } = new List<string>();
 
+        public static int _userScore { get; set; }
 
 
         /// <summary>
