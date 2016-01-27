@@ -88,45 +88,57 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel x:Name="stkPanContiners" Grid.Column="3" Grid.Row="4"  Grid.ColumnSpan="4" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">
-            <TextBox x:Name="txtLetterBox0" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox1" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox2" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox3" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox4" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox5" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox6" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox7" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
-            <TextBox x:Name="txtLetterBox8" Text="" Height="65" Width="14" IsReadOnly="True" FontSize="30" InputScope="Text" TextAlignment="Center" Margin="0,0,10,0" IsEnabled="False"/>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
+            <Image  Name="imgCountDownLogo"
+                    Source="Assets/background.jpg"
+                    Width="Auto"
+                    Height="Auto"
+                    Stretch="None" />
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="4" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="58,0,0,0">
-            <TextBox x:Name="txtBoxUsrWord" Text="" Height="65" Width="655" FontSize="30" TextAlignment="Center" TextWrapping="Wrap" AcceptsReturn="false" Visibility="Collapsed" KeyDown="txtBoxUsrWord_KeyDown" />
+
+        <StackPanel x:Name="stkPanContiners" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">
+            <TextBox x:Name="txtLetterBox0" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox1" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox2" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox3" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox4" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox5" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox6" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox7" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <TextBox x:Name="txtLetterBox8" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="4" Orientation="Horizontal" VerticalAlignment="Center" Margin="58,0,58,0">
-
-            <Button x:Name="btnConsonants" Content="Consonants" Height="65" Width="200" FontSize="30" Click="btnConsonants_Click" Margin="0,0,245,0" Visibility="Visible"
-                    Background="{x:Null}" Style="{StaticResource ButtonStyle1}"/>
-            
-            <Button  x:Name="btnCheckWord" Content="Enter" Height="65" Width="125" FontSize="30" Click="btnCheckWord_Click" Visibility="Collapsed" Margin="260,0,65,0" 
-                    Background="{x:Null}" Style="{StaticResource ButtonStyle1}" ToolTipService.ToolTip="Shortcut key: Enter"/>
-
-            <Button x:Name="btnVowels" Content="Vowels" Height="65" Width="200" FontSize="30" Click="btnVowels_Click" Visibility="Visible"
-                    Background="{x:Null}" Style="{StaticResource ButtonStyle1}"/>
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="5,0,0,0" Width="615">
+            <TextBox x:Name="txtBoxUsrWord" Height="50" Width="615" FontSize="20" TextAlignment="Center" AcceptsReturn="false" 
+                     Visibility="Visible" KeyDown="txtBoxUsrWord_KeyDown" Padding="0,10,0,0"/>
         </StackPanel>
 
-        <StackPanel x:Name="stkPnlScoreBoard" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible" BorderThickness="2" BorderBrush="Black" Height="Auto">
-            
-            
-            <TextBox x:Name="textBox" TextWrapping="Wrap" Text="    Word                 Score" TextAlignment="Left" FontSize="30" IsReadOnly="True" BorderThickness="0,0,0,3"/>
-            <TextBlock x:Name="txtBlockUsrScore" TextWrapping="Wrap" Text="" Height="Auto" Width="Auto" FontSize="30" ScrollViewer.IsVerticalRailEnabled="True"/>
+        <StackPanel Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center" Margin="40,0,0,0" Width="650">
 
+            <Button x:Name="btnConsonants" Content="Consonants" Height="50" Width="140" FontSize="20" Click="btnConsonants_Click" Margin="0,0,340,0" Visibility="Visible" 
+                    Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White">
+            </Button>
+
+            <Button  x:Name="btnCheckWord" Content="Enter" Height="50" Width="140" FontSize="20" Click="btnCheckWord_Click" Visibility="Collapsed" Margin="260,0,65,0" 
+                     Style="{StaticResource ButtonStyle1}"/>
+
+            <Button x:Name="btnVowels" Content="Vowels" Height="50" Width="140" FontSize="20" Click="btnVowels_Click" Visibility="Visible"
+                     Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White"/>
         </StackPanel>
-        
-        
-        
-        
+
+        <StackPanel x:Name="stkPnlScoreBoard" Grid.Column="0" Grid.ColumnSpan="10" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible" BorderThickness="2" Width="300"
+                    BorderBrush="Black" Height="Auto" CornerRadius="25" Background="#FFE7E8E8" HorizontalAlignment="Left" Margin="10,0,0,0" >
+
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="    Word                Score" TextAlignment="Left" FontSize="25" 
+                       SelectionHighlightColor="{x:Null}" Foreground="Black" />
+            <Rectangle Fill="#FFF4F4F5" Height="1" Stroke="Black" />
+            <TextBlock x:Name="txtBlockUsrScore" TextWrapping="Wrap" Text="" Height="Auto" Width="Auto" FontSize="20"/>
+            <!--<Slider x:Name="slider" VerticalAlignment="Center" HorizontalAlignment="Right"   Width="40" Height="189" Orientation="Vertical" Maximum="100" IsDirectionReversed="True"/>-->
+        </StackPanel>
+
+
         <!--<TextBlock x:Name="outbox"
                          TextAlignment="Center"
                          Foreground="White"

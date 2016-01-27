@@ -22,6 +22,9 @@ namespace CountDownApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        DispatcherTimer imgTimer = new DispatcherTimer();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -34,22 +37,47 @@ namespace CountDownApp
             }
         }
 
+        void imgTimer_Tick(object sender, object e)
+        {           
+            imgTimer.Stop();
+            Frame.Navigate(typeof(gamePage));
+        }
+
+        private void startAnimation()
+        {
+            //after 2 seconds and the timer stops navigate to the new page
+            imgTimer.Tick += imgTimer_Tick;
+            imgTimer.Interval = new TimeSpan(0, 0, 0, 2, 0);
+            imgTimer.Start();
+
+            btnSinglePlayer.Visibility = Visibility.Collapsed;
+            btnMultiPlayer.Visibility = Visibility.Collapsed;
+            btnRules.Visibility = Visibility.Collapsed;
+        }
+
+
         private void btnSinglePlayer_Click(object sender, RoutedEventArgs e)
         {
-            //Navigate to the Main Game Page
-            Frame.Navigate(typeof(gamePage));
+            animatedImage_ImageOpened();
+
+            startAnimation();
         }
 
         private void btnMultiPlayer_Click(object sender, RoutedEventArgs e)
         {
-            //Navigate to the Main Game Page
-            Frame.Navigate(typeof(gamePage));
+            animatedImage_ImageOpened();
+            startAnimation();
         }
 
         private void btnRules_Click(object sender, RoutedEventArgs e)
         {
-            //Navigate to the Main Rules Page
-            Frame.Navigate(typeof(rulesPage));
+            animatedImage_ImageOpened();
+            startAnimation();
+        }
+
+        public void animatedImage_ImageOpened()
+        {
+            ShowStoryboard.Begin();//Start the Animation 
         }
     }
 }

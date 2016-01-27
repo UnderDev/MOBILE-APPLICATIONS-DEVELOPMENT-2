@@ -20,51 +20,34 @@
             <ColumnDefinition Width=".5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Image x:Name="animatedImage" Stretch="Fill" Opacity="0" Visibility="Visible" Source="Assets/CountDownLogo.png" Margin="250,150,250,150"/>
+        </StackPanel>
+        <StackPanel>
+            <StackPanel.Resources >
+                <Storyboard x:Name="ShowStoryboard" >
+                    <DoubleAnimation 
+                                 Storyboard.TargetName="animatedImage" 
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0.0" 
+                                 To="2.0" 
+                                 Duration="0:0:1"
+                                 AutoReverse="True"/>
+                </Storyboard>
+            </StackPanel.Resources>
+        </StackPanel>
 
-            <Button x:Name="btnSinglePlayer" 
-                    Content="Single Player" 
-        		    Click="btnSinglePlayer_Click" 
-                    RenderTransformOrigin="0.5,0.5"
-                    FontSize="55" 
-                    Visibility="Visible" Margin="0,-131,0,133">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFA5D5CE" Offset="1"/>
-                        <GradientStop Color="#FF249847"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" >
 
+            <Button x:Name="btnSinglePlayer" Content="Single Player" Click="btnSinglePlayer_Click" FontSize="35" Foreground="Black"
+                    Width="330" FontFamily="Stencil Std" Padding="0,20,0,0"/>
 
-            <Button x:Name="btnMultiPlayer" 
-                    Content="MultiPlayer" 
-        		    Click="btnMultiPlayer_Click" 
-                    RenderTransformOrigin="0.5,0.5"
-                    FontSize="55" 
-                    Visibility="Visible" Margin="0,1" Width="330">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFA5D5CE" Offset="1"/>
-                        <GradientStop Color="#FF249847"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="btnMultiPlayer" Content="MultiPlayer" Click="btnMultiPlayer_Click" FontSize="35" Foreground="Black"
+                    Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0"/>
 
-            <Button x:Name="btnRules" 
-                    Content="Rules" 
-        		    Click="btnRules_Click" 
-                    RenderTransformOrigin="0.5,0.5"
-                    FontSize="55" 
-                    Visibility="Visible" Margin="0,136,0,-134" Width="330" VerticalAlignment="Top">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFA5D5CE" Offset="1"/>
-                        <GradientStop Color="#FF249847"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <Button x:Name="btnRules" Content="Rules" Click="btnRules_Click" FontSize="35" Foreground="Black" Width="330" 
+                    FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" />
+        </StackPanel>
 
-        </Grid>
     </Grid>
 </Page>

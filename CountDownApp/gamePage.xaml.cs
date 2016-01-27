@@ -90,11 +90,17 @@ namespace CountDownApp
         /*
         Generates a number between 0 and the number passed in
         */
-        private int rndNumGen(int maxNo)
+        private int rndNumGen(int _maxNo)
         {
-             Random r = new Random();
-            int   num = r.Next(maxNo);
-            return num;
+            
+            Random r = new Random();
+            int _curNum = r.Next(_maxNo);
+
+            //Stops 2 lettets of the same beside Each other
+            if (_rndNum == _curNum)
+                _curNum = r.Next(_maxNo);
+            
+            return _curNum;
         }
 
         private void btnCheckWord_Click(object sender, RoutedEventArgs e)
@@ -156,7 +162,7 @@ namespace CountDownApp
                 App._userScore = txtBoxUsrWord.Text.Length;
 
                 stkPnlScoreBoard.Visibility = Visibility.Visible;
-                txtBlockUsrScore.Text += ("    "+txtBoxUsrWord.Text+" \t\t"+ App._userScore +"\n");
+                txtBlockUsrScore.Text += ("        "+txtBoxUsrWord.Text+"\t\t"+ App._userScore +"\n");
             }
         }
 
