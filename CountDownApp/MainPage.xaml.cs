@@ -37,12 +37,6 @@ namespace CountDownApp
             }
         }
 
-        void imgTimer_Tick(object sender, object e)
-        {           
-            imgTimer.Stop();
-            Frame.Navigate(typeof(gamePage));
-        }
-
         private void startAnimation()
         {
             //after 2 seconds and the timer stops navigate to the new page
@@ -55,6 +49,11 @@ namespace CountDownApp
             btnRules.Visibility = Visibility.Collapsed;
         }
 
+        void imgTimer_Tick(object sender, object e)
+        {
+            imgTimer.Stop();
+            Frame.Navigate(typeof(gamePage));
+        }
 
         private void btnSinglePlayer_Click(object sender, RoutedEventArgs e)
         {

@@ -67,8 +67,8 @@
     <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1.5*"/>
@@ -98,6 +98,43 @@
         </StackPanel>
 
 
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="7" Grid.RowSpan="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="248,0,0,360"  >
+            <Line Name="line1" X1="10" Y1="0" X2="10" Y2="140" StrokeThickness="5" Stroke="Black" Margin="0,0,0,0" RenderTransformOrigin="0.5,1" Width="20">
+                <Line.RenderTransform>
+                    <CompositeTransform x:Name="rotate" Rotation="0"/>
+                </Line.RenderTransform>
+            </Line>
+        </StackPanel>
+
+
+        <StackPanel>
+            <StackPanel.Resources >
+                <Storyboard x:Name="ShowStoryboardAnimation" >
+                    <DoubleAnimation Storyboard.TargetName="line1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
+                </Storyboard>
+            </StackPanel.Resources>
+        </StackPanel>
+
+
+ 
+        <StackPanel  Grid.Row="0" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,100">
+            <Border CornerRadius="180"
+                    Background="Transparent"
+                    BorderThickness="3"
+                    BorderBrush="Black"
+                    Padding="5,5,5,5"
+                    Margin="110,0,0,0">
+
+                <TextBlock x:Name="time_Box"
+        	               Width="280"
+                           Height="280"                          
+        	               Foreground="red"
+                           FontSize="60"
+                           TextAlignment="Center"
+                           Padding="100"/>
+            </Border>
+        </StackPanel>
+
         <StackPanel x:Name="stkPanContiners" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">
             <TextBox x:Name="txtLetterBox0" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
             <TextBox x:Name="txtLetterBox1" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
@@ -110,13 +147,14 @@
             <TextBox x:Name="txtLetterBox8" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
         </StackPanel>
 
+
         <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="5,0,0,0" Width="615">
             <TextBox x:Name="txtBoxUsrWord" Height="50" Width="615" FontSize="20" TextAlignment="Center" AcceptsReturn="false" 
                      Visibility="Visible" KeyDown="txtBoxUsrWord_KeyDown" Padding="0,10,0,0"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center" Margin="40,0,0,0" Width="650">
 
+        <StackPanel Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center" Margin="40,0,0,0" Width="650">
             <Button x:Name="btnConsonants" Content="Consonants" Height="50" Width="140" FontSize="20" Click="btnConsonants_Click" Margin="0,0,340,0" Visibility="Visible" 
                     Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White">
             </Button>
@@ -128,7 +166,8 @@
                      Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White"/>
         </StackPanel>
 
-        <StackPanel x:Name="stkPnlScoreBoard" Grid.Column="0" Grid.ColumnSpan="10" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible" BorderThickness="2" Width="300"
+
+        <StackPanel x:Name="stkPnlScoreBoard" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible" BorderThickness="2" Width="300"
                     BorderBrush="Black" Height="Auto" CornerRadius="25" Background="#FFE7E8E8" HorizontalAlignment="Left" Margin="10,0,0,0" >
 
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="    Word                Score" TextAlignment="Left" FontSize="25" 
@@ -138,11 +177,6 @@
             <!--<Slider x:Name="slider" VerticalAlignment="Center" HorizontalAlignment="Right"   Width="40" Height="189" Orientation="Vertical" Maximum="100" IsDirectionReversed="True"/>-->
         </StackPanel>
 
-
-        <!--<TextBlock x:Name="outbox"
-                         TextAlignment="Center"
-                         Foreground="White"
-                         FontSize="35"/>-->
 
     </Grid>
 </Page>

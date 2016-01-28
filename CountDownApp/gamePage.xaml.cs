@@ -20,6 +20,9 @@ namespace CountDownApp
 
         private int _rndNum = 0 , _textBoxLoc = 0;
 
+        private DispatcherTimer _countDownTimer = new DispatcherTimer();
+        private int _countTicks = 29;
+
 
         public gamePage()
         {
@@ -66,14 +69,18 @@ namespace CountDownApp
         Also disable the 2 buttons that generate the letters
         */
         private void sendCharToTextBox(char _letter)
-        {
-
+        {                    
             _listAvailLetters.Add(_letter);//Add the current letters to a list 
             _textboxArray[_textBoxLoc].Text = _letter.ToString();//send the textbox the letter
 
             //if all letters are added hide buttons
             if (_textBoxLoc == _textboxArray.Length-1)
             {
+                startTimer();
+                ShowStoryboardAnimation.Begin();//clock animation
+
+
+
                 _textBoxLoc = 0;
                 btnVowels.Visibility = Visibility.Collapsed;
                 btnConsonants.Visibility = Visibility.Collapsed;
@@ -104,7 +111,7 @@ namespace CountDownApp
         }
 
         private void btnCheckWord_Click(object sender, RoutedEventArgs e)
-        {
+        {         
             if (chkLettersValidity())
             {
                 chkWordValidity();
@@ -178,11 +185,34 @@ namespace CountDownApp
             }
         }
 
+        private void startTimer()
+        {          
+            _countDownTimer.Tick += numTimer_Tick;        
+            _countDownTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            _countDownTimer.Start();        
+        }
+
+        void numTimer_Tick(object sender, object e)
+        {
+            time_Box.Text = _countTicks--.ToString();
+            if (_countTicks == -1)
+            {
+                resetGame();
+            }
+        }
+
         /*
         Resets the games: Buttons, and emptys the textboxes containing letters
         */
         private void resetGame()
         {
+            _countDownTimer.Stop();
+            _countTicks = 29;
+            ShowStoryboardAnimation.Stop();
+            time_Box.Text = "";
+
+
+
             btnVowels.Visibility = Visibility.Visible;
             btnConsonants.Visibility = Visibility.Visible;
 
