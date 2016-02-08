@@ -90,7 +90,7 @@
 
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
-            <Image  Name="imgCountDownLogo"
+            <Image  x:Name="imgCountDownLogo"
                     Source="Assets/background.jpg"
                     Width="Auto"
                     Height="Auto"
@@ -98,42 +98,74 @@
         </StackPanel>
 
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="7" Grid.RowSpan="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="248,0,0,360"  >
-            <Line Name="line1" X1="10" Y1="0" X2="10" Y2="140" StrokeThickness="5" Stroke="Black" Margin="0,0,0,0" RenderTransformOrigin="0.5,1" Width="20">
-                <Line.RenderTransform>
-                    <CompositeTransform x:Name="rotate" Rotation="0"/>
-                </Line.RenderTransform>
-            </Line>
+        <StackPanel  Grid.Row="0" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,100">
+
+            <Border CornerRadius="180"
+                    BorderThickness="10"
+                    BorderBrush="Black"
+                    Padding="5,5,5,5"
+                    Background="WhiteSmoke">
+
+
+                <Canvas x:Name="_markersCanvas" Width="300" Height="300" >
+                    <TextBlock x:Name="time_Box"
+                         
+        	               Foreground="red"
+                           FontSize="60"
+                           TextAlignment="Center"
+                           Width="300"
+                           Height="300"/>
+
+                    <Line x:Name="clockHand" 
+                          X1="11" Y1="0" X2="11" Y2="150" 
+                          StrokeThickness="3" Stroke="Black" 
+                          Margin="140,0,0,0"
+                          RenderTransformOrigin="0.5,1" 
+                          Width="22"
+                          Height="150">
+
+                        <Line.RenderTransform>
+                            <CompositeTransform x:Name="rotate" Rotation="0"/>
+                        </Line.RenderTransform>
+                    </Line>
+
+                    <Line x:Name="clockFace1" 
+                          X1="12" Y1="1" X2="20" Y2="13" 
+                          StrokeThickness="2" Stroke="Black" 
+                          RenderTransformOrigin="0.5,1"
+                          Width="22" Height="150"
+                          Margin="140,0">
+                        <Line.RenderTransform>
+                            <CompositeTransform x:Name="rotate2" Rotation="0"/>
+                        </Line.RenderTransform>
+                    </Line>
+
+                    <Line x:Name="clockFace2" 
+                          X1="20" Y1="1" X2="12" Y2="13" 
+                          StrokeThickness="2" Stroke="Black" 
+                          RenderTransformOrigin="1,1" 
+                          Width="21" Height="150"                          
+                          Margin="130,0">
+                        <Line.RenderTransform>
+                            <CompositeTransform x:Name="rotate3" Rotation="0"/>
+                        </Line.RenderTransform>
+                    </Line>
+
+                </Canvas>
+            </Border>
         </StackPanel>
 
 
         <StackPanel>
             <StackPanel.Resources >
                 <Storyboard x:Name="ShowStoryboardAnimation" >
-                    <DoubleAnimation Storyboard.TargetName="line1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
+                    <DoubleAnimation Storyboard.TargetName="clockHand"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
+                    <DoubleAnimation Storyboard.TargetName="clockFace1"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
+                    <DoubleAnimation Storyboard.TargetName="clockFace2"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
                 </Storyboard>
             </StackPanel.Resources>
         </StackPanel>
 
-
- 
-        <StackPanel  Grid.Row="0" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,100">
-            <Border CornerRadius="180"
-                    Background="Transparent"
-                    BorderThickness="3"
-                    BorderBrush="Black"
-                    Padding="5,5,5,5"
-                    Margin="110,0,0,0">
-
-                <TextBlock x:Name="time_Box"
-        	               Width="280"
-                           Height="280"                          
-        	               Foreground="red"
-                           FontSize="60"
-                           TextAlignment="Center"
-                           Padding="100"/>
-            </Border>
-        </StackPanel>
 
         <StackPanel x:Name="stkPanContiners" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">
             <TextBox x:Name="txtLetterBox0" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
@@ -150,7 +182,7 @@
 
         <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="5,0,0,0" Width="615">
             <TextBox x:Name="txtBoxUsrWord" Height="50" Width="615" FontSize="20" TextAlignment="Center" AcceptsReturn="false" 
-                     Visibility="Visible" KeyDown="txtBoxUsrWord_KeyDown" Padding="0,10,0,0"/>
+                     Visibility="Collapsed" KeyDown="txtBoxUsrWord_KeyDown" Padding="0,10,0,0"/>
         </StackPanel>
 
 
