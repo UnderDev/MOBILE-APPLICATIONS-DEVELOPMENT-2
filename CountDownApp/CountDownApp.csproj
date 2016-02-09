@@ -116,7 +116,7 @@
     <None Include="CountDownApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\background.jpg" />
+    <Content Include="Assets\CountDownBg.jpg" />
     <Content Include="Assets\CountDownLogo.png" />
     <Content Include="Files\words.txt" />
     <Content Include="Properties\Default.rd.xml" />

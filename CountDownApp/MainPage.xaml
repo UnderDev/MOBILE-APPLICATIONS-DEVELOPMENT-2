@@ -38,6 +38,16 @@
             </StackPanel.Resources>
         </StackPanel>
 
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
+            <Image  x:Name="imgCountDownLogo"
+                    Source="Assets/CountDownBg.jpg"
+                    Width="Auto"
+                    Height="Auto"
+                    Stretch="None" />
+        </StackPanel>
+
+
+
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" >
 
             <Button x:Name="btnSinglePlayer" Content="Single Player" Click="btnSinglePlayer_Click" FontSize="35" Foreground="Black"

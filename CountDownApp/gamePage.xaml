@@ -55,8 +55,17 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle RadiusY="15.833" RadiusX="15.833" Stroke="Black" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition"/>
-                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0,-1,0,5"/>
+                            <Rectangle RadiusY="21.583" RadiusX="21.583" Stroke="Black" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF711D3E" Offset="0.006"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                        <GradientStop Color="#FFB68B9C" Offset="0.977"/>
+                                        <GradientStop Color="#FF87415D" Offset="0.688"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Margin="-1,-1,-2,-2" Foreground="White"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -91,14 +100,14 @@
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
             <Image  x:Name="imgCountDownLogo"
-                    Source="Assets/background.jpg"
+                    Source="Assets/CountDownBg.jpg"
                     Width="Auto"
                     Height="Auto"
                     Stretch="None" />
         </StackPanel>
 
 
-        <StackPanel  Grid.Row="0" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="100,0,0,100">
+        <StackPanel  Grid.Row="0" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="90,0,0,100">
 
             <Border CornerRadius="180"
                     BorderThickness="10"
@@ -168,44 +177,49 @@
 
 
         <StackPanel x:Name="stkPanContiners" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">
-            <TextBox x:Name="txtLetterBox0" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox1" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox2" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox3" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox4" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox5" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox6" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox7" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
-            <TextBox x:Name="txtLetterBox8" Height="50" Width="10" IsReadOnly="True" FontSize="20" InputScope="Text" TextAlignment="Center" Margin="0,0,5,0" Padding="0,10,0,0"/>
+            <Button x:Name="btnLetterBox0" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox1" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox2" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox3" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox4" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox5" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox6" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox7" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox8" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
         </StackPanel>
 
 
-        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="5,0,0,0" Width="615">
-            <TextBox x:Name="txtBoxUsrWord" Height="50" Width="615" FontSize="20" TextAlignment="Center" AcceptsReturn="false" 
-                     Visibility="Collapsed" KeyDown="txtBoxUsrWord_KeyDown" Padding="0,10,0,0"/>
-        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-
-        <StackPanel Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center" Margin="40,0,0,0" Width="650">
-            <Button x:Name="btnConsonants" Content="Consonants" Height="50" Width="140" FontSize="20" Click="btnConsonants_Click" Margin="0,0,340,0" Visibility="Visible" 
-                    Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White">
-            </Button>
-
-            <Button  x:Name="btnCheckWord" Content="Enter" Height="50" Width="140" FontSize="20" Click="btnCheckWord_Click" Visibility="Collapsed" Margin="260,0,65,0" 
+            <Button x:Name="btnReset" Content="Reset"  Height="50" Width="100" Margin="0,0,0,40" Visibility="Collapsed" FontSize="20" Foreground="White" Click="bntReset_Click"
                      Style="{StaticResource ButtonStyle1}"/>
 
-            <Button x:Name="btnVowels" Content="Vowels" Height="50" Width="140" FontSize="20" Click="btnVowels_Click" Visibility="Visible"
-                     Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White"/>
+            <TextBox x:Name="txtBoxUsrWord" Height="50" Width="320" FontSize="22" TextAlignment="Center" AcceptsReturn="false" 
+                     Visibility="Collapsed" KeyDown="txtBoxUsrWord_KeyDown" Margin="30,0,30,40"/>
+
+            <Button  x:Name="btnCheckWord" Content="Enter" Height="50" Width="100" FontSize="20" Click="btnCheckWord_Click" Visibility="Collapsed" Margin="0,0,0,40" 
+                     Style="{StaticResource ButtonStyle1}"/>
         </StackPanel>
 
 
-        <StackPanel x:Name="stkPnlScoreBoard" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" Visibility="Visible" BorderThickness="2" Width="300"
-                    BorderBrush="Black" Height="Auto" CornerRadius="25" Background="#FFE7E8E8" HorizontalAlignment="Left" Margin="10,0,0,0" >
+        <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+            
+            <Button x:Name="btnConsonants" Content="Consonants" Height="50" Width="140" FontSize="20" Click="btnConsonants_Click" Margin="0,0,50,0" Visibility="Visible" 
+                    Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White" FontFamily="Elephant"/>
 
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="    Word                Score" TextAlignment="Left" FontSize="25" 
+            <Button x:Name="btnVowels" Content="Vowels" Height="50" Width="140" FontSize="20" Click="btnVowels_Click" Visibility="Visible"
+                     Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White" FontFamily="Elephant"/>
+            
+        </StackPanel>
+
+
+        <StackPanel x:Name="stkPnlScoreBoard" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" Visibility="Visible" BorderThickness="2"
+                    BorderBrush="Black"  CornerRadius="25" Background="#FFE7E8E8" HorizontalAlignment="Left" Margin="10,0,0,0" Height="Auto" VerticalAlignment="Top">
+
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="    Word          Score" TextAlignment="Center" FontSize="20" Padding="0,0,30,0"
                        SelectionHighlightColor="{x:Null}" Foreground="Black" />
             <Rectangle Fill="#FFF4F4F5" Height="1" Stroke="Black" />
-            <TextBlock x:Name="txtBlockUsrScore" TextWrapping="Wrap" Text="" Height="Auto" Width="Auto" FontSize="20"/>
+            <TextBlock x:Name="txtBlockUsrScore" TextWrapping="Wrap" FontSize="20" MinHeight="50" MaxHeight="500"/>
             <!--<Slider x:Name="slider" VerticalAlignment="Center" HorizontalAlignment="Right"   Width="40" Height="189" Orientation="Vertical" Maximum="100" IsDirectionReversed="True"/>-->
         </StackPanel>
 
