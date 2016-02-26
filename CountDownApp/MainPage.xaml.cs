@@ -52,7 +52,7 @@ namespace CountDownApp
         void imgTimer_Tick(object sender, object e)
         {
             imgTimer.Stop();
-            Frame.Navigate(typeof(gamePage));
+            Frame.Navigate(typeof(NumberGamePage));
         }
 
         private void btnSinglePlayer_Click(object sender, RoutedEventArgs e)

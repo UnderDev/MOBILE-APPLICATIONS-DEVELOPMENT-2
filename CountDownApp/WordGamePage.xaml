@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="CountDownApp.gamePage"
+    x:Class="CountDownApp.WordGamePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CountDownApp"
@@ -117,15 +117,56 @@
 
 
                 <Canvas x:Name="_markersCanvas" Width="300" Height="300" >
-                    <TextBlock x:Name="time_Box"
-                         
-        	               Foreground="red"
-                           FontSize="60"
-                           TextAlignment="Center"
-                           Width="300"
-                           Height="300"/>
+                    <!--<TextBlock x:Name="time_Box" 
+                               Foreground="red"
+                               Height="Auto"
+                               Width="Auto"
+                               FontSize="60"
+                               TextAlignment="Center"                         
+                               Text="5" 
+                               Canvas.Left="135" Canvas.Top="102"/>-->
 
                     <Line x:Name="clockHand" 
+                          X1="20" Y1="0" X2="14" Y2="150" 
+                          StrokeThickness="7" Stroke="Black" 
+                          Margin="130,0,0,0"
+                          RenderTransformOrigin="0.43,1.01" 
+                          Width="50"
+                          Height="150">
+
+                        <Line.RenderTransform>
+                            <CompositeTransform x:Name="rotate" Rotation="0"/>
+                        </Line.RenderTransform>
+                    </Line>
+
+                    <Line x:Name="clockHand1" 
+                          X1="20" Y1="0" X2="29" Y2="150" 
+                          StrokeThickness="7" Stroke="Black" 
+                          Margin="130,0,0,0"
+                          RenderTransformOrigin="0.43,1.01" 
+                          Width="50"
+                          Height="150">
+
+                        <Line.RenderTransform>
+                            <CompositeTransform x:Name="rotate1" Rotation="0"/>
+                        </Line.RenderTransform>
+                    </Line>
+
+
+                    <Ellipse x:Name="center"           
+                          StrokeThickness="3" Stroke="Black"
+                          RenderTransformOrigin="0.5,1" 
+                          Width="23"
+                          Height="23" 
+                          Fill="Black"
+                          Canvas.Left="140" Canvas.Top="140">
+                    </Ellipse>
+
+
+
+
+
+                    <!--<Line x:Name="clockHand" 
                           X1="11" Y1="0" X2="11" Y2="150" 
                           StrokeThickness="3" Stroke="Black" 
                           Margin="140,0,0,0"
@@ -136,9 +177,9 @@
                         <Line.RenderTransform>
                             <CompositeTransform x:Name="rotate" Rotation="0"/>
                         </Line.RenderTransform>
-                    </Line>
+                    </Line>-->
 
-                    <Line x:Name="clockFace1" 
+                    <!--<Line x:Name="clockFace1" 
                           X1="12" Y1="1" X2="20" Y2="13" 
                           StrokeThickness="2" Stroke="Black" 
                           RenderTransformOrigin="0.5,1"
@@ -158,7 +199,7 @@
                         <Line.RenderTransform>
                             <CompositeTransform x:Name="rotate3" Rotation="0"/>
                         </Line.RenderTransform>
-                    </Line>
+                    </Line>-->
 
                 </Canvas>
             </Border>
@@ -169,23 +210,23 @@
             <StackPanel.Resources >
                 <Storyboard x:Name="ShowStoryboardAnimation" >
                     <DoubleAnimation Storyboard.TargetName="clockHand"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
-                    <DoubleAnimation Storyboard.TargetName="clockFace1"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
-                    <DoubleAnimation Storyboard.TargetName="clockFace2"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
+                    <DoubleAnimation Storyboard.TargetName="clockHand1"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
+                    <!--<DoubleAnimation Storyboard.TargetName="clockFace2"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>-->
                 </Storyboard>
             </StackPanel.Resources>
         </StackPanel>
 
 
         <StackPanel x:Name="stkPanContiners" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,0,0,0">
-            <Button x:Name="btnLetterBox0" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox1" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox2" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox3" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox4" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox5" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox6" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox7" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
-            <Button x:Name="btnLetterBox8" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="Button_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox0" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox1" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox2" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox3" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox4" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox5" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox6" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox7" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            <Button x:Name="btnLetterBox8" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
         </StackPanel>
 
 
@@ -203,23 +244,27 @@
 
 
         <StackPanel Grid.Row="4" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="10" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
-            
+
             <Button x:Name="btnConsonants" Content="Consonants" Height="50" Width="140" FontSize="20" Click="btnConsonants_Click" Margin="0,0,50,0" Visibility="Visible" 
                     Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White" FontFamily="Elephant"/>
 
             <Button x:Name="btnVowels" Content="Vowels" Height="50" Width="140" FontSize="20" Click="btnVowels_Click" Visibility="Visible"
                      Style="{StaticResource ButtonStyle1}" ClickMode="Press" Foreground="White" FontFamily="Elephant"/>
-            
+
         </StackPanel>
 
 
         <StackPanel x:Name="stkPnlScoreBoard" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" Visibility="Visible" BorderThickness="2"
                     BorderBrush="Black"  CornerRadius="25" Background="#FFE7E8E8" HorizontalAlignment="Left" Margin="10,0,0,0" Height="Auto" VerticalAlignment="Top">
 
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="    Word          Score" TextAlignment="Center" FontSize="20" Padding="0,0,30,0"
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="    Score           Word" TextAlignment="Center" FontSize="20" Padding="0,0,50,0"
                        SelectionHighlightColor="{x:Null}" Foreground="Black" />
             <Rectangle Fill="#FFF4F4F5" Height="1" Stroke="Black" />
-            <TextBlock x:Name="txtBlockUsrScore" TextWrapping="Wrap" FontSize="20" MinHeight="50" MaxHeight="500"/>
+
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                <TextBlock x:Name="txtBlockUsrScore" TextWrapping="Wrap" FontSize="20" MinHeight="50" MaxHeight="500"  HorizontalAlignment="Center" Margin="20,0,0,0" />
+                <TextBlock x:Name="txtBlockUsrWord" TextWrapping="Wrap" FontSize="20" MinHeight="50" MaxHeight="500" HorizontalAlignment="Center" Margin="60,0,0,0"/>
+            </StackPanel>
             <!--<Slider x:Name="slider" VerticalAlignment="Center" HorizontalAlignment="Right"   Width="40" Height="189" Orientation="Vertical" Maximum="100" IsDirectionReversed="True"/>-->
         </StackPanel>
 

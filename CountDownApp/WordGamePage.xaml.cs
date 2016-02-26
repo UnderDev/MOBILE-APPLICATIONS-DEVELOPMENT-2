@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.Foundation;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -8,23 +9,23 @@ using Windows.UI.Xaml.Controls;
 namespace CountDownApp
 {
 
-    public sealed partial class gamePage : Page
+    public sealed partial class WordGamePage : Page
     {
 
         private char[] _vowlesArray = new char[5] { 'A', 'E', 'I', 'O', 'U' };
         private char[] _consonantsArray = new char[21] { 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z' };
         private List<Char> _listAvailLetters = new List<char>();
 
-        //Create an TextBox array that holds 9 TextBoxs
+        //Create an Button array that holds 9 Button
         private Button[] _btnArray = new Button[9];
 
         private int _rndNum = 0, _btnLoc = 0;
 
         private DispatcherTimer _countDownTimer = new DispatcherTimer();
-        private int _countTicks = 29;
+        private int _countTicks = 28;
 
 
-        public gamePage()
+        public WordGamePage()
         {
             this.InitializeComponent();
 
@@ -48,6 +49,7 @@ namespace CountDownApp
                 tb.TextAlignment = TextAlignment.Center;
                 tb.RenderTransformOrigin = new Point(1, 1);
                 tb.FontSize = 10;
+                tb.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Red);
 
                 //sets the Number output to the textblocks in incriments of 5
                 num += 5;
@@ -86,11 +88,10 @@ namespace CountDownApp
         */
         private void enableAllLetterBtns()
         {
-            int i = 0;
             foreach (Button b in _btnArray)
             {
-                _btnArray[i].IsEnabled = true;
-                _btnArray[i++].Opacity = 1;
+                b.IsEnabled = true;
+                b.Opacity = 1;
             }
         }
 
@@ -98,11 +99,10 @@ namespace CountDownApp
         */
         private void disableAllLetterBtns()
         {
-            int i = 0;
             foreach (Button b in _btnArray)
             {
-                _btnArray[i].IsEnabled = false;
-                _btnArray[i++].Opacity = 1;
+                b.IsEnabled = false;
+                b.Opacity = 1;
             }
         }
 
@@ -133,11 +133,12 @@ namespace CountDownApp
         }
 
 
-        /* Get the location of the textBox and displays the char passed in by the 
+        //FILLS THE 9 BUTTONS FROM CONST OR VOWL BUTTON
+        /* Get the location of the Button and displays the char passed in by the 
            btnVowels/btnConsonants btn click events. Also disable the 2 buttons that 
            generate the letters and makes the entry for the word and Button Visible
         */
-        private void sendCharToTextBox(char _letter)
+        private void sendCharToTextBox(char _letter)//Send char to BUTTON ************** FIX
         {
             _listAvailLetters.Add(_letter);//Add the current letters to a list 
             _btnArray[_btnLoc].Content = _letter.ToString();//sends the letter to the Btn
@@ -243,22 +244,17 @@ namespace CountDownApp
         {
             //Searches the _wordsList for the word entered by the user(To lowercase) and gives its index
             int _index = App._wordsList.BinarySearch(txtBoxUsrWord.Text.ToLower());
-            string scoreBoardTxt;
-            //if the word is found in App._wordsList
+
+            //If the word is found in App._wordsList
             if (_index >= 0)
             {
                 //Gets the words length and adds it to the users Score
                 App._userScore = txtBoxUsrWord.Text.Length;
 
-                scoreBoardTxt = txtBoxUsrWord.Text + App._userScore;
-
-                //                ************************************ ScoreBoard ********************************************************* padleft() fills the left with space if no char
                 stkPnlScoreBoard.Visibility = Visibility.Visible;
 
-                txtBlockUsrScore.Text += (scoreBoardTxt + "\n");
-                //                *********************************************************************************************************
-
-
+                txtBlockUsrScore.Text += (App._userScore + "\n");
+                txtBlockUsrWord.Text += (txtBoxUsrWord.Text + "\n");
             }
         }
 
@@ -289,7 +285,7 @@ namespace CountDownApp
         */
         void numTimer_Tick(object sender, object e)
         {
-            time_Box.Text = _countTicks--.ToString();
+            //time_Box.Text = _countTicks--.ToString();
             if (_countTicks == -1)
             {
                 resetGame();
@@ -302,16 +298,16 @@ namespace CountDownApp
         * the btns Name, and converts that into an int. After finding the number, it gets that button
         * by using the num as an index in _btnArray and mess with its properties.  
         */
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LetterBtn_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
-            String btnIndex;
+            //String btnIndex;
 
-            btnIndex = clickedButton.Name;
+            //btnIndex = clickedButton.Name;
 
-            int btnNum = Convert.ToInt32((btnIndex.Substring(btnIndex.Length - 1)));
+            //int btnNum = Convert.ToInt32((btnIndex.Substring(btnIndex.Length - 1)));
 
-            clickedButton = _btnArray[btnNum];
+            //clickedButton = _btnArray[btnNum];
 
             //Add the contents of that button into the Textbox
             txtBoxUsrWord.Text += clickedButton.Content;
@@ -336,7 +332,7 @@ namespace CountDownApp
             _countDownTimer.Tick -= numTimer_Tick;
             _countTicks = 29;
             ShowStoryboardAnimation.Stop();
-            time_Box.Text = "";
+            //time_Box.Text = "";
 
 
             btnVowels.Visibility = Visibility.Visible;
@@ -357,9 +353,6 @@ namespace CountDownApp
 
             _btnLoc = 0;
         }
-
-
-
 
     }
 }
