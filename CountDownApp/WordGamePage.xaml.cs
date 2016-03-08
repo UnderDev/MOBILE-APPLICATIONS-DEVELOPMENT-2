@@ -330,7 +330,7 @@ namespace CountDownApp
             disableAllLetterBtns();
             _countDownTimer.Stop();
             _countDownTimer.Tick -= numTimer_Tick;
-            _countTicks = 29;
+            _countTicks = 28;
             ShowStoryboardAnimation.Stop();
             //time_Box.Text = "";
 

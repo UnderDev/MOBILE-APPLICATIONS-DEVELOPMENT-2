@@ -28,10 +28,11 @@ namespace CountDownApp
         private List<int> _tempLrgNumLst;
         private List<int> _tempSmlNumLst;
 
+        private List<Button> _tempNumBtnAvail = new List<Button>();
         private List<Button> _btnNumLst = new List<Button>();
         private List<Button> _btnOpLst = new List<Button>();
 
-        private int _rndNum = 0, _btnLoc = 0, _cntPlys = 0, _total = 0 , _curNum = 0,targetNum=0;
+        private int _rndNum = 0, _btnLoc = 0, _cntPlys = 0, _currTotal = 0, _curNum = 0, _targetNum = 0;
 
         private string _operatorUsed = "";
 
@@ -49,7 +50,6 @@ namespace CountDownApp
             //Create a copy of the lists above, Temp List
             _tempLrgNumLst = new List<int>(_largeNumLst);
             _tempSmlNumLst = new List<int>(_smallNumLst);
-
         }
 
 
@@ -114,15 +114,17 @@ namespace CountDownApp
                 tempArray = _tempSmlNumLst;
             }
 
-            _rndNum = rndNumGen(0,max);//get a rnd num
+            _rndNum = rndNumGen(0, max);//get a rnd num
             sendNumToBtn(tempArray[_rndNum]);//send num to Btn
 
+            //Removes the element in the list based on which btn was clicked
             if (b.Name.Equals("btnLargeNum"))
                 _tempLrgNumLst.RemoveAt(_rndNum);
 
             else
                 _tempSmlNumLst.RemoveAt(_rndNum);
 
+            //Hide the btn btnLargeNum when all 4 numbers are drawn
             if (_tempLrgNumLst.Count == 0)
                 btnLargeNum.IsEnabled = false;
         }
@@ -139,16 +141,17 @@ namespace CountDownApp
             if (_btnLoc == _btnNumLst.Count - 1)
             {
                 enableAllBtns(_btnNumLst);
+                _tempNumBtnAvail.AddRange(_btnNumLst);//Populate the temp Btn slist
 
                 stkPanNumBtns.Visibility = Visibility.Collapsed;
                 stkPanOperators.Visibility = Visibility.Visible;
                 stkPanReset.Visibility = Visibility.Visible;
 
-
-
                 /////////////////////*********************************
-                targetNum = rndNumGen(101, 999);
-                txtBoxTarget.Text = targetNum.ToString();
+                _targetNum = rndNumGen(101, 999);
+                txtBoxTarget.Text = _targetNum.ToString();
+
+                startTimer();
 
                 _btnLoc = 0;//Reset the btn Location
             }
@@ -162,46 +165,50 @@ namespace CountDownApp
         private int rndNumGen(int minNo, int maxNo)
         {
             Random r = new Random();
-            return r.Next(minNo,maxNo);
+            return r.Next(minNo, maxNo);
         }
 
 
+        /* Method is called from Enter btn click event and is use to get the diffrence between the total the user
+        * got to from the Target Number.
+        * The users Score is then calculated based on how close they were from the target;
+        * 0  away = 10 points
+        * 5  away = 7 points
+        * 10 away = 5 points
+        */
+        private void EnterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //Take the _currTotal from user - the Target to get cal score 
+            int totalAway = Math.Abs(_targetNum - _currTotal);
+           
+            //Get the Total from target and add core to App._UserScore
+            if (totalAway == 0)
+                App._userScore += 10;
+
+            else if (totalAway <= 5)
+                App._userScore += 7;
+
+            else if (totalAway <= 10)
+                App._userScore += 5;
+        }
+
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
-            txtBoxResult.Text = "";
+        {          
+            txtBoxMaths.Text = "";
+            txtBoxTotal.Text = "";
             enableAllBtns(_btnNumLst);
             disableAllBtns(_btnOpLst);
 
             _tempLrgNumLst = _largeNumLst;
             _tempSmlNumLst = _smallNumLst;
+            _tempNumBtnAvail.Clear();
+
+            _tempNumBtnAvail.AddRange(_btnNumLst);//Copy contents from one list to another (reset)
 
             _cntPlys = 0;
-            _total = 0;
+            _currTotal = 0;
         }
-
-
-        private void resetGame(object sender, RoutedEventArgs e)
-        {
-            foreach (Button b in _btnNumLst)
-            {
-                b.Content = "";
-            }
-            _btnLoc = 0;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //Get the number
         private void AddBtnContToTxtBox_Click(object sender, RoutedEventArgs e)
@@ -210,35 +217,36 @@ namespace CountDownApp
             Button clickedButton = sender as Button;
             StackPanel sp = clickedButton.Parent as StackPanel;//Gets the buttons Parent stackPanel
             string btnContents = clickedButton.Content.ToString();
-            
-            //Add the contents of that button into the Textbox
-            txtBoxResult.Text += btnContents;
 
-            //if the countPlays is == maxplays all numbers have been played **Fix**
+            //Add the contents of that button into the Textbox
+            txtBoxMaths.Text += btnContents;
+
+            //if the _cntPlys is != maxplays Keep adding btn contents to other btn **Fix**
             if (!((_cntPlys++) >= (10)))
             {
+                //If the click event came from the Child elements in the stack pannel stkPanNum
                 if (sp.Name.Equals("stkPanNum"))
                 {
                     enableAllBtns(_btnOpLst);
-                    disableAllBtns(_btnNumLst);
+                    disableAllBtns(_tempNumBtnAvail);
+                    _tempNumBtnAvail.Remove(clickedButton);
 
                     _curNum = Convert.ToInt16(clickedButton.Content);
 
-                    //Makes sure its not the first time and that it takes the total from the next number pressed
+                    //Calculates the totoal based on the old total and after the use hits an operator and number button
                     if (_cntPlys > 3 && _cntPlys % 2 == 1)
                     {
-                        _total = calculateTotal(_operatorUsed,_total,_curNum);
-                        txtBoxResult.Text += (" = " + _total + "\n");
+                        _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
+                        txtBoxMaths.Text += (" = " + _currTotal + "\n");
                     }
-                    
                 }
-                else//if the button click event came from the operators stackPanal 
+                else//else the button click event came from the operators stackPanal 
                 {
-                    enableAllBtns(_btnNumLst);
+                    enableAllBtns(_tempNumBtnAvail);
                     disableAllBtns(_btnOpLst);
 
-                    if ((_total == 0))
-                        _total = _curNum;
+                    if ((_currTotal == 0))
+                        _currTotal = _curNum;
 
                     if (btnContents.Equals("÷"))
                         hideUndivideabeBtns();
@@ -246,41 +254,36 @@ namespace CountDownApp
                     _operatorUsed = btnContents;
                 }
 
-                //Do calculation once off
+                //Do calculation ONCE after the user has clicked on 2 numbers and 1 operator
                 if ((_cntPlys < 4) && (_cntPlys % 3 == 0))
                 {
-                    _total = calculateTotal(_operatorUsed, _total, _curNum);
-                    txtBoxResult.Text += (" = " + _total + "\n");
+                    _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
+                    txtBoxMaths.Text += (" = " + _currTotal + "\n");
                 }
-
             }
-            else{
-                _total = calculateTotal(_operatorUsed, _total, _curNum);
-                txtBoxResult.Text += (" = " + _total + "\n");
+            else {
+                _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
+                txtBoxMaths.Text += (" = " + _currTotal + "\n");
 
                 disableAllBtns(_btnNumLst);
                 disableAllBtns(_btnOpLst);
             }
+
+            txtBoxTotal.Text = _currTotal.ToString();
 
             clickedButton.Opacity = .5;
             clickedButton.IsEnabled = false;
         }
 
 
-
-
-
-
-
-
         /*Method calculates and returns the total to the caller from 2 
         * numbers and the associated operator. 
         */
-        private int calculateTotal(string op,int num1, int num2)
+        private int calculateTotal(string op, int num1, int num2)
         {
             int total = 0;
 
-            //if 1st number is < the 2nd. swap positions to avoid negitive values etc
+            //if 1st number is < the 2nd. swap positions to avoid negitive values when using ÷ or -
             if (num1 < num2)
             {
                 int temp = num1;
@@ -306,8 +309,8 @@ namespace CountDownApp
         {
             int btnContent;
             double chkDbl;
-            int numToDivide = _total;
-      
+            int numToDivide = _currTotal;
+
             foreach (Button b in _btnNumLst)
             {
                 btnContent = Convert.ToInt16(b.Content);
@@ -322,7 +325,7 @@ namespace CountDownApp
 
                 chkDbl = ((double)btnContent / numToDivide);
                 //resets the numToDivide var back to the first chosen number to divide 
-                numToDivide = _total;
+                numToDivide = _currTotal;
 
                 //Hides all buttons that dont divide evenly not leaving a fraction
                 if (!(chkDbl % 1 == 0))
@@ -333,8 +336,39 @@ namespace CountDownApp
         }
 
 
+        /*Starts the Timer in an intervals of 1 sec
+*/
+        private void startTimer()
+        {
+            App._countDownTimer.Tick += numTimer_Tick;
+            App._countDownTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            App._countDownTimer.Start();
+        }
 
 
+        /*if the timers _countTicks is equal to -1 reset the game;
+        */
+        void numTimer_Tick(object sender, object e)
+        {
+            txtBoxCountDown.Text = App._countTicks--.ToString();
+            if (App._countTicks == -1)
+            {
+                resetGame();
+            }
+        }
+
+
+        private void resetGame()
+        {
+            App._countDownTimer.Stop();
+            App._countTicks = 30;
+
+            //foreach (Button b in _btnNumLst)
+            //{
+            //    b.Content = "";
+            //}
+            //_btnLoc = 0;
+        }
 
     }
 }

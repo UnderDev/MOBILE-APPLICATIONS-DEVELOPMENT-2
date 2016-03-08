@@ -30,7 +30,11 @@ namespace CountDownApp
 
         public static int _userScore { get; set; }
 
+        public static DispatcherTimer _countDownTimer = new DispatcherTimer();
+       // private int _countTicks = 28;
 
+        public static int _countTicks { get; set; }
+        
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -42,6 +46,8 @@ namespace CountDownApp
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            _countTicks = 30;
         }
 
         //reads from the file line by line into a List<String>
