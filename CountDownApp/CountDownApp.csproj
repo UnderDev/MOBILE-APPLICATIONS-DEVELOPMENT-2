@@ -101,6 +101,7 @@
     <Compile Include="NumberGamePage.xaml.cs">
       <DependentUpon>NumberGamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PublicMethods.cs" />
     <Compile Include="WordGamePage.xaml.cs">
       <DependentUpon>WordGamePage.xaml</DependentUpon>
     </Compile>

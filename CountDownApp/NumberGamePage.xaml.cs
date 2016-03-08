@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -50,6 +51,8 @@ namespace CountDownApp
             //Create a copy of the lists above, Temp List
             _tempLrgNumLst = new List<int>(_largeNumLst);
             _tempSmlNumLst = new List<int>(_smallNumLst);
+
+            setClockMarkers();
         }
 
 
@@ -152,6 +155,7 @@ namespace CountDownApp
                 txtBoxTarget.Text = _targetNum.ToString();
 
                 startTimer();
+                ShowStoryboardAnimation.Begin();//Clock animation
 
                 _btnLoc = 0;//Reset the btn Location
             }
@@ -350,19 +354,58 @@ namespace CountDownApp
         */
         void numTimer_Tick(object sender, object e)
         {
-            txtBoxCountDown.Text = App._countTicks--.ToString();
+           // txtBoxCountDown.Text = App._countTicks--.ToString();
             if (App._countTicks == -1)
             {
                 resetGame();
             }
         }
 
+        /*Sets up the Clocks Markers(numbers) at runTime into TextBlocks
+*/
+        private void setClockMarkers()
+        {
+            int num = 5;//Increment in 5s
+
+            for (int i = 1; i <= 12; ++i)
+            {
+                TextBlock tb = new TextBlock();
+
+                tb.Text = num.ToString();
+
+                tb.TextAlignment = TextAlignment.Center;
+                tb.RenderTransformOrigin = new Point(1, 1);
+                tb.FontSize = 10;
+                tb.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Red);
+
+                //sets the Number output to the textblocks in incriments of 5
+                num += 5;
+
+                double radius = 55;
+
+                //Sets the spacing between each of the numbers
+                double angle = Math.PI * i * 30.0 / 180.0;
+
+                //sets the x and y positions of the Circle on the canvas
+                double xPos = Math.Sin(angle) * radius + radius;
+                double yPos = -Math.Cos(angle) * radius + radius; //-Math.Cos important
+
+                Canvas.SetLeft(tb, xPos);
+                Canvas.SetTop(tb, yPos);
+
+                //adds the TextBlocks to the canvas as a child element
+                _markersCanvas.Children.Add(tb);
+            }
+        }
+
+
+
 
         private void resetGame()
         {
             App._countDownTimer.Stop();
             App._countTicks = 30;
-
+            ShowStoryboardAnimation.Stop();
             //foreach (Button b in _btnNumLst)
             //{
             //    b.Content = "";
