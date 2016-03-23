@@ -28,13 +28,9 @@ namespace CountDownApp
         public static bool check { get; private set; }
         public static List<string> _wordsList { get; private set; } = new List<string>();
 
-        public static int _userScore { get; set; }
+        public static int _userScore = 0;
+        public static int _NumOfGames { get; set; }
 
-        public static DispatcherTimer _countDownTimer = new DispatcherTimer();
-       // private int _countTicks = 28;
-
-        public static int _countTicks { get; set; }
-        
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -47,7 +43,6 @@ namespace CountDownApp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            _countTicks = 30;
         }
 
         //reads from the file line by line into a List<String>
@@ -57,10 +52,10 @@ namespace CountDownApp
 
             using (StreamReader reader = new StreamReader(await _file.OpenStreamForReadAsync()))
             {
-                string _line;
-                while ((_line = reader.ReadLine()) != null)
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    _wordsList.Add(_line); // Add to list line by line
+                    _wordsList.Add(line); // Add to list line by line
                 }
             }
             check = true;//check its all read in and finished
@@ -71,6 +66,7 @@ namespace CountDownApp
             //w8 till ReadFromFile() is finished
             await Task.Run(() => ReadFromFile());
         }//load
+
 
 
 

@@ -37,6 +37,8 @@ namespace CountDownApp
 
         private string _operatorUsed = "";
 
+        private DispatcherTimer _countDownTimer = new DispatcherTimer();
+        private int _countTicks = 28;
 
         public NumberGamePage()
         {
@@ -180,25 +182,44 @@ namespace CountDownApp
         * 5  away = 7 points
         * 10 away = 5 points
         */
-        private void EnterBtn_Click(object sender, RoutedEventArgs e)
+        private void BtnResults_Click(object sender, RoutedEventArgs e)
         {
             //Take the _currTotal from user - the Target to get cal score 
             int totalAway = Math.Abs(_targetNum - _currTotal);
-           
+            int score=0;
             //Get the Total from target and add core to App._UserScore
             if (totalAway == 0)
+            {
                 App._userScore += 10;
+                score = 10;
+            }
 
             else if (totalAway <= 5)
+            {
                 App._userScore += 7;
+                score = 7;
+            }
 
             else if (totalAway <= 10)
+            {
                 App._userScore += 5;
+                score = 5;
+            }
+            showScoreBoard(totalAway,score);
+
         }
 
+        private void showScoreBoard(int totAway, int score)
+        {
+            NumAwayTxtBox.Text = "You Were " + totAway + " Away! Score: " + score;
+            SpLayout.Visibility = Visibility.Collapsed;
+            SpResultsLayout.Visibility = Visibility.Visible;
+            UsrScoreTxtBox.Text = Convert.ToString(App._userScore);
+
+        }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
-        {          
+        {
             txtBoxMaths.Text = "";
             txtBoxTotal.Text = "";
             enableAllBtns(_btnNumLst);
@@ -225,24 +246,19 @@ namespace CountDownApp
             //Add the contents of that button into the Textbox
             txtBoxMaths.Text += btnContents;
 
-            //if the _cntPlys is != maxplays Keep adding btn contents to other btn **Fix**
-            if (!((_cntPlys++) >= (10)))
+            //if the _cntPlys is != maxplays Keep adding btn contents to other btn 
+            if (!((_cntPlys++) > (10)))
             {
                 //If the click event came from the Child elements in the stack pannel stkPanNum
                 if (sp.Name.Equals("stkPanNum"))
                 {
-                    enableAllBtns(_btnOpLst);
+                    if (!((_cntPlys) > (10)))
+                        enableAllBtns(_btnOpLst);
+
                     disableAllBtns(_tempNumBtnAvail);
                     _tempNumBtnAvail.Remove(clickedButton);
 
                     _curNum = Convert.ToInt16(clickedButton.Content);
-
-                    //Calculates the totoal based on the old total and after the use hits an operator and number button
-                    if (_cntPlys > 3 && _cntPlys % 2 == 1)
-                    {
-                        _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
-                        txtBoxMaths.Text += (" = " + _currTotal + "\n");
-                    }
                 }
                 else//else the button click event came from the operators stackPanal 
                 {
@@ -253,32 +269,30 @@ namespace CountDownApp
                         _currTotal = _curNum;
 
                     if (btnContents.Equals("÷"))
-                        hideUndivideabeBtns();
+                        hideUnDivisibleBtns();
 
                     _operatorUsed = btnContents;
                 }
-
-                //Do calculation ONCE after the user has clicked on 2 numbers and 1 operator
-                if ((_cntPlys < 4) && (_cntPlys % 3 == 0))
-                {
-                    _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
-                    txtBoxMaths.Text += (" = " + _currTotal + "\n");
-                }
             }
             else {
-                _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
-                txtBoxMaths.Text += (" = " + _currTotal + "\n");
-
                 disableAllBtns(_btnNumLst);
                 disableAllBtns(_btnOpLst);
             }
 
-            txtBoxTotal.Text = _currTotal.ToString();
+            //Calculate Total after the user has clicked on 2 numbers and 1 operator, and after each following operator thereafter
+            if (((_cntPlys < 4) && (_cntPlys % 3 == 0)) || ((_cntPlys > 3) && (_cntPlys % 2 == 1)))
+                printCalculations();
 
             clickedButton.Opacity = .5;
             clickedButton.IsEnabled = false;
         }
 
+        private void printCalculations()
+        {
+            _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
+            txtBoxMaths.Text += (" = " + _currTotal + "\n");
+            txtBoxTotal.Text = _currTotal.ToString();
+        }
 
         /*Method calculates and returns the total to the caller from 2 
         * numbers and the associated operator. 
@@ -309,7 +323,7 @@ namespace CountDownApp
         * the user picked first or the _total, then checks to see if it divides evenly
         * if not, and the answer is a fraction, disable the button.
         */
-        private void hideUndivideabeBtns()
+        private void hideUnDivisibleBtns()
         {
             int btnContent;
             double chkDbl;
@@ -341,12 +355,12 @@ namespace CountDownApp
 
 
         /*Starts the Timer in an intervals of 1 sec
-*/
+        */
         private void startTimer()
         {
-            App._countDownTimer.Tick += numTimer_Tick;
-            App._countDownTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            App._countDownTimer.Start();
+            _countDownTimer.Tick += numTimer_Tick;
+            _countDownTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            _countDownTimer.Start();
         }
 
 
@@ -354,15 +368,25 @@ namespace CountDownApp
         */
         void numTimer_Tick(object sender, object e)
         {
-           // txtBoxCountDown.Text = App._countTicks--.ToString();
-            if (App._countTicks == -1)
+            _countTicks--;
+            if (_countTicks == -1)
             {
-                resetGame();
+                stkPanNumBtns.Visibility = Visibility.Collapsed;
+                stkPanNum.Visibility = Visibility.Collapsed;
+                stkPanOperators.Visibility = Visibility.Collapsed;
+                stkPanReset.Visibility = Visibility.Collapsed;
+
+                SPResultsBtn.Visibility = Visibility.Visible;
+
+                _countDownTimer.Stop();
+                _countDownTimer.Tick -= numTimer_Tick;
             }
         }
 
+
+
         /*Sets up the Clocks Markers(numbers) at runTime into TextBlocks
-*/
+        */
         private void setClockMarkers()
         {
             int num = 5;//Increment in 5s
@@ -394,17 +418,29 @@ namespace CountDownApp
                 Canvas.SetTop(tb, yPos);
 
                 //adds the TextBlocks to the canvas as a child element
-                _markersCanvas.Children.Add(tb);
+                MarkersCanvas.Children.Add(tb);
             }
         }
+
+
+        private void BtnNxtLvl_Click(object sender, RoutedEventArgs e)
+        {
+            if (++App._NumOfGames == 10)
+                Frame.Navigate(typeof(MainPage));
+            else
+                Frame.Navigate(typeof(WordGamePage));
+        }
+
+
+
 
 
 
 
         private void resetGame()
         {
-            App._countDownTimer.Stop();
-            App._countTicks = 30;
+            _countDownTimer.Stop();
+            _countTicks = 28;
             ShowStoryboardAnimation.Stop();
             //foreach (Button b in _btnNumLst)
             //{

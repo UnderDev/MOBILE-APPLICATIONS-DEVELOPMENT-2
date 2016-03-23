@@ -19,10 +19,11 @@ namespace CountDownApp
         //Create an Button array that holds 9 Button
         private Button[] _btnArray = new Button[9];
 
-        private int _rndNum = 0, _btnLoc = 0;
+        private int _rndNum = 0, _btnLoc = 0, _btnWordIndex = 0;
 
         private DispatcherTimer _countDownTimer = new DispatcherTimer();
         private int _countTicks = 28;
+        private Boolean _timesUp = false;
 
 
         public WordGamePage()
@@ -35,7 +36,7 @@ namespace CountDownApp
 
 
         /*Sets up the Clocks Markers(numbers) at runTime into TextBlocks
-        */
+      */
         private void setClockMarkers()
         {
             int num = 5;//Increment in 5s
@@ -54,22 +55,21 @@ namespace CountDownApp
                 //sets the Number output to the textblocks in incriments of 5
                 num += 5;
 
-                double radius = 145;
+                double radius = 75;
 
                 //Sets the spacing between each of the numbers
                 double angle = Math.PI * i * 30.0 / 180.0;
 
                 //sets the x and y positions of the Circle on the canvas
-                double xPos = Math.Sin(angle) * radius + 145;
-                double yPos = -Math.Cos(angle) * radius + 145; //-Math.Cos important
+                double xPos = Math.Sin(angle) * radius + radius;
+                double yPos = -Math.Cos(angle) * radius + radius; //-Math.Cos important
 
                 Canvas.SetLeft(tb, xPos);
                 Canvas.SetTop(tb, yPos);
 
                 //adds the TextBlocks to the canvas as a child element
-                _markersCanvas.Children.Add(tb);
+                MarkersCanvas.Children.Add(tb);
             }
-
             getBtnList();
         }
 
@@ -138,7 +138,7 @@ namespace CountDownApp
            btnVowels/btnConsonants btn click events. Also disable the 2 buttons that 
            generate the letters and makes the entry for the word and Button Visible
         */
-        private void sendCharToTextBox(char _letter)//Send char to BUTTON ************** FIX
+        private void sendCharToTextBox(char _letter)//Send char to BUTTON 
         {
             _listAvailLetters.Add(_letter);//Add the current letters to a list 
             _btnArray[_btnLoc].Content = _letter.ToString();//sends the letter to the Btn
@@ -148,17 +148,13 @@ namespace CountDownApp
             {
                 enableAllLetterBtns();//enable all the Btns
 
-
                 startTimer();//Start the Timer
 
                 ShowStoryboardAnimation.Begin();//Clock animation
 
-                btnVowels.Visibility = Visibility.Collapsed;
-                btnConsonants.Visibility = Visibility.Collapsed;
+                SpConstVowel.Visibility = Visibility.Collapsed;
 
-                txtBoxUsrWord.Visibility = Visibility.Visible;
-                btnCheckWord.Visibility = Visibility.Visible;
-                btnReset.Visibility = Visibility.Visible;
+                SpResetEntrWord.Visibility = Visibility.Visible;
 
                 _btnLoc = 0;//Reset the btn Location
             }
@@ -184,37 +180,19 @@ namespace CountDownApp
         }
 
 
-        /*Button click event to check the word from the user
-        */
-        private void btnCheckWord_Click(object sender, RoutedEventArgs e)
-        {
-            //Checks that the letters Entered were valid letters given  (True/Fase)       
-            if (chkLettersValidity())
-            {
-                chkWordValidity();
-            }
-            else
-            {
-                //Display a message to the user that its an INVALID WORD based on the givn letters
-            }
-
-
-            //RESET AFTER THE GAMES OVER
-            resetGame();
-        }
-
-
         /*Checks that the letters entered by the user(converted to uppercase) are the letters that were displayed
           and that there are no duplicate letters used by the user when not available 
         */
         private Boolean chkLettersValidity()
         {
             Boolean validLetters = true;
-            String toUpper;
             int leterIndex;
 
+            List<Char> tempList = new List<Char>();
+            tempList.AddRange(_listAvailLetters);
+
             //Convert the users input to upper case
-            toUpper = txtBoxUsrWord.Text.ToUpper();
+            String toUpper = txtBoxUsrWord.Text.ToUpper();
 
             //Creates a new char array from the string to check for correct letters
             Char[] newArray = toUpper.ToCharArray();
@@ -223,16 +201,17 @@ namespace CountDownApp
             for (int i = 0; i < newArray.Length; i++)
             {
                 //Finds the index of the current letter [i]  in the list _listAvailLetters, 
-                leterIndex = _listAvailLetters.IndexOf(newArray[i]);
+                leterIndex = tempList.IndexOf(newArray[i]);
 
                 //If the letters not in the list
                 if (leterIndex == -1)
                 {
                     validLetters = false;
+                    i = newArray.Length;
                 }
                 //Remove the letter from the list of available letters to stop duplicate letters 
                 else
-                    _listAvailLetters.RemoveAt(leterIndex);
+                    tempList.RemoveAt(leterIndex);
             }
             return validLetters;
         }
@@ -240,33 +219,33 @@ namespace CountDownApp
 
         /*Checks the Word Entered By the user against the App._wordsList using a Binary Search,
         */
-        private void chkWordValidity()
+        private void chkWordValidity(String word)
         {
             //Searches the _wordsList for the word entered by the user(To lowercase) and gives its index
-            int _index = App._wordsList.BinarySearch(txtBoxUsrWord.Text.ToLower());
+            int _index = App._wordsList.BinarySearch(word.ToLower());
 
-            //If the word is found in App._wordsList
-            if (_index >= 0)
-            {
-                //Gets the words length and adds it to the users Score
-                App._userScore = txtBoxUsrWord.Text.Length;
-
-                stkPnlScoreBoard.Visibility = Visibility.Visible;
-
-                txtBlockUsrScore.Text += (App._userScore + "\n");
-                txtBlockUsrWord.Text += (txtBoxUsrWord.Text + "\n");
+          
+                //If the word is found in App._wordsList
+                if (_index >= 0)
+                {
+                    //Gets the words length and adds it to the users Score
+                    App._userScore += word.Length;
+                    UsrScoreTxtBox.Text = App._userScore.ToString();
+                    WordNotFoundTxtBox.Text = "\"" + word + "\" Found! Score: " + word.Length;
+                }
+                else
+                    WordNotFoundTxtBox.Text = "\"" + word + "\" Was not found in the Dictonary!";
             }
-        }
+        
 
 
-        /* Adds a KeyDown Event to Checks all input from the keyboard in the textBox txtBoxUsr to see if the user hit Enter key,
-           if they did call the btnCheckWord_Click button
+        /*Listens for the KeyDownEvent "EnterKey" then calls the click event below
         */
         private void txtBoxUsrWord_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                btnCheckWord_Click(sender, e);
+                btnEnterWord_Click(sender, e);
             }
         }
 
@@ -281,14 +260,40 @@ namespace CountDownApp
         }
 
 
-        /*if the timers _countTicks is equal to -1 reset the game;
+        /*If the timers _countTicks is equal to -1 the game is over;
         */
         void numTimer_Tick(object sender, object e)
         {
-            //time_Box.Text = _countTicks--.ToString();
+            _countTicks--;
             if (_countTicks == -1)
             {
-                resetGame();
+                SpClock.Visibility = Visibility.Collapsed;
+                stkPanContiners.Visibility = Visibility.Collapsed;
+                SpResetEntrWord.Visibility = Visibility.Collapsed;
+                SpConstVowel.Visibility = Visibility.Collapsed;
+
+                SPMessage.Visibility = Visibility.Visible;
+
+                _countDownTimer.Stop();
+                _countDownTimer.Tick -= numTimer_Tick;
+
+                EnableAllUserWords();
+
+                //Prevents the Message button been added if the user came up with some words
+                if (UsersWordsList.FindName("word0")==null)
+                {
+                    _timesUp = true;
+                    CreateBtnsRunTime(_timesUp);
+                }
+            }
+        }
+
+        //Enables all the Stackpannels children buttons
+        private void EnableAllUserWords()
+        {
+            foreach(Button b in UsersWordsList.Children)
+            {
+                b.IsEnabled = true;
             }
         }
 
@@ -301,19 +306,12 @@ namespace CountDownApp
         private void LetterBtn_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
-            //String btnIndex;
-
-            //btnIndex = clickedButton.Name;
-
-            //int btnNum = Convert.ToInt32((btnIndex.Substring(btnIndex.Length - 1)));
-
-            //clickedButton = _btnArray[btnNum];
-
             //Add the contents of that button into the Textbox
             txtBoxUsrWord.Text += clickedButton.Content;
             clickedButton.Opacity = .5;
             clickedButton.IsEnabled = false;
         }
+
 
         private void bntReset_Click(object sender, RoutedEventArgs e)
         {
@@ -321,7 +319,75 @@ namespace CountDownApp
             enableAllLetterBtns();
         }
 
-        //txtBoxUsrWord.Text += txtLetterBox0.Text;
+
+        /*Adds the users words to a button (created at runtime) 
+        */
+        private void btnEnterWord_Click(object sender, RoutedEventArgs e)
+        {
+            bool validLetters = chkLettersValidity();
+            //makes sure the textbox has input / its valid letters Entered by user/ and a max guess of 5
+            if ((txtBoxUsrWord.Text != "") && (validLetters == true) && (_btnWordIndex < 5))
+            {
+                _timesUp = false;
+                CreateBtnsRunTime(_timesUp);
+
+                //Enable all the letter buttons again
+                enableAllLetterBtns();
+            }
+            txtBoxUsrWord.Text = "";
+        }
+
+        /*Sets up the buttons Contents and settings etc 
+        */
+        private void CreateBtnsRunTime(Boolean timeUp)
+        {
+            Button btnWord = new Button();
+            btnWord.Height = 30;
+            btnWord.FontSize = 13;
+            btnWord.Width = 215;
+            btnWord.Margin = new Thickness(0, 0, 0, 5);
+            btnWord.Name = "word" + _btnWordIndex++;
+            btnWord.Click += BtnWord_Click;
+            btnWord.VerticalAlignment = VerticalAlignment.Center;
+            btnWord.HorizontalAlignment = HorizontalAlignment.Center;
+            btnWord.BorderThickness = new Thickness(1, 1, 1, 1);
+            btnWord.IsEnabled = false;
+        
+            if (timeUp)
+                btnWord.Content = "No Words, Click here to Continue";
+            else
+                btnWord.Content = txtBoxUsrWord.Text;
+
+            UsersWordsList.Visibility = Visibility.Visible;
+            UsersWordsList.Children.Add(btnWord);
+
+        }
+
+
+        /*Event fired when use click on a word they entered
+        */
+        private void BtnWord_Click(object sender, RoutedEventArgs e)
+        {
+            Button btnWord = (Button)sender;
+            SPScores.Visibility = Visibility.Visible;
+            SPNextGame.Visibility = Visibility.Visible;
+            WordNotFoundTxtBox.Visibility = Visibility.Visible;
+
+            UsersWordsList.Visibility = Visibility.Collapsed;
+
+            if(!_timesUp)
+            chkWordValidity(btnWord.Content.ToString());
+
+            SPMessage.Visibility = Visibility.Collapsed;
+        }
+
+        //Navigate to The numbers game page
+        private void BtnNxtLvl_Click(object sender, RoutedEventArgs e)
+        {
+            App._NumOfGames++;
+            Frame.Navigate(typeof(NumberGamePage));
+        }
+
 
         /* Resets the games: Buttons, and emptys the textboxes containing letters
         */
@@ -332,17 +398,13 @@ namespace CountDownApp
             _countDownTimer.Tick -= numTimer_Tick;
             _countTicks = 28;
             ShowStoryboardAnimation.Stop();
-            //time_Box.Text = "";
 
-
-            btnVowels.Visibility = Visibility.Visible;
-            btnConsonants.Visibility = Visibility.Visible;
+            SpConstVowel.Visibility = Visibility.Visible;
 
             txtBoxUsrWord.Text = "";
 
-            btnCheckWord.Visibility = Visibility.Collapsed;
-            txtBoxUsrWord.Visibility = Visibility.Collapsed;
-            btnReset.Visibility = Visibility.Collapsed;
+
+            SpResetEntrWord.Visibility = Visibility.Collapsed;
 
             //Reset all the textboxes to have nothing in them
             foreach (Button t in _btnArray)
