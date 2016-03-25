@@ -74,7 +74,6 @@ namespace CountDownApp
             }
         }
 
-
         /* Enable all Buttons so the user can click them
         */
         private void enableAllBtns(List<Button> btnList)
@@ -96,7 +95,6 @@ namespace CountDownApp
                 b.Opacity = 1;
             }
         }
-
 
         /* Creates a temp list from either "_tempLrgNumLst" or "_tempSmlNumLst"
         *  based on the Sender and the buttons Name propriety, using btnSmallNum as default.
@@ -134,7 +132,6 @@ namespace CountDownApp
                 btnLargeNum.IsEnabled = false;
         }
 
-
         /*Used to send the numbers from the Large/Small num btns to the appropriate btnNumBox    
         */
         private void sendNumToBtn(int num)
@@ -165,7 +162,6 @@ namespace CountDownApp
                 _btnLoc++;//Used to fnd the next button
         }
 
-
         /*Generates a number between 0 and the number passed in.
         */
         private int rndNumGen(int minNo, int maxNo)
@@ -173,7 +169,6 @@ namespace CountDownApp
             Random r = new Random();
             return r.Next(minNo, maxNo);
         }
-
 
         /* Method is called from Enter btn click event and is use to get the diffrence between the total the user
         * got to from the Target Number.
@@ -186,42 +181,50 @@ namespace CountDownApp
         {
             //Take the _currTotal from user - the Target to get cal score 
             int totalAway = Math.Abs(_targetNum - _currTotal);
-            int score=0;
+            int score = 0;
             //Get the Total from target and add core to App._UserScore
             if (totalAway == 0)
             {
-                App._userScore += 10;
+                App._UserScore += 10;
                 score = 10;
             }
 
             else if (totalAway <= 5)
             {
-                App._userScore += 7;
+                App._UserScore += 7;
                 score = 7;
             }
 
             else if (totalAway <= 10)
             {
-                App._userScore += 5;
+                App._UserScore += 5;
                 score = 5;
             }
-            showScoreBoard(totalAway,score);
+            showScoreBoard(totalAway, score);
 
         }
 
+        /*Displayes the ScoreBoard
+        */
         private void showScoreBoard(int totAway, int score)
         {
             NumAwayTxtBox.Text = "You Were " + totAway + " Away! Score: " + score;
             SpLayout.Visibility = Visibility.Collapsed;
             SpResultsLayout.Visibility = Visibility.Visible;
-            UsrScoreTxtBox.Text = Convert.ToString(App._userScore);
-
+            UsrScoreTxtBox.Text = Convert.ToString(App._UserScore);
         }
 
+        /*Resets all the Fields Lised Below so the user can have another try (Timer not reset)
+        */
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
-            txtBoxMaths.Text = "";
-            txtBoxTotal.Text = "";
+            txtBoxMathTotals.Text = "";
+            txtBoxMathsSigns.Text = "";
+            txtBoxMathsNum.Text = "";
+            txtBoxMathsEquals.Text = "";
+            txtBoxMathTotal.Text = "";
+
+            txtBoxTotal.Text = "Total";
             enableAllBtns(_btnNumLst);
             disableAllBtns(_btnOpLst);
 
@@ -234,8 +237,9 @@ namespace CountDownApp
             _cntPlys = 0;
             _currTotal = 0;
         }
-
-        //Get the number
+        
+        /*Method gets the Sender as a button, takes its contents and sets/hides settings below
+        */
         private void AddBtnContToTxtBox_Click(object sender, RoutedEventArgs e)
         {
             //Append the number onto a string eg "34"
@@ -244,7 +248,7 @@ namespace CountDownApp
             string btnContents = clickedButton.Content.ToString();
 
             //Add the contents of that button into the Textbox
-            txtBoxMaths.Text += btnContents;
+            //txtBoxMaths.Text += (btnContents).PadRight(7);
 
             //if the _cntPlys is != maxplays Keep adding btn contents to other btn 
             if (!((_cntPlys++) > (10)))
@@ -259,6 +263,11 @@ namespace CountDownApp
                     _tempNumBtnAvail.Remove(clickedButton);
 
                     _curNum = Convert.ToInt16(clickedButton.Content);
+
+                    if (_cntPlys == 1)
+                        txtBoxMathTotals.Text += (btnContents + "\n");
+                    else
+                        txtBoxMathsNum.Text += (btnContents + "\n");
                 }
                 else//else the button click event came from the operators stackPanal 
                 {
@@ -272,6 +281,8 @@ namespace CountDownApp
                         hideUnDivisibleBtns();
 
                     _operatorUsed = btnContents;
+
+                    txtBoxMathsSigns.Text += (btnContents+"\n");
                 }
             }
             else {
@@ -281,21 +292,27 @@ namespace CountDownApp
 
             //Calculate Total after the user has clicked on 2 numbers and 1 operator, and after each following operator thereafter
             if (((_cntPlys < 4) && (_cntPlys % 3 == 0)) || ((_cntPlys > 3) && (_cntPlys % 2 == 1)))
-                printCalculations();
+                printCalculations(btnContents);
 
             clickedButton.Opacity = .5;
             clickedButton.IsEnabled = false;
         }
 
-        private void printCalculations()
+        /*Prints the calculations fron the user to the Maths textbox
+        */
+        private void printCalculations(String btnContents)
         {
             _currTotal = calculateTotal(_operatorUsed, _currTotal, _curNum);
-            txtBoxMaths.Text += (" = " + _currTotal + "\n");
+
+            txtBoxMathTotals.Text += (_currTotal.ToString() + "\n");
+            txtBoxMathsEquals.Text += ("=\n");
+            txtBoxMathTotal.Text += (_currTotal.ToString() + "\n");
+
             txtBoxTotal.Text = _currTotal.ToString();
+
         }
 
-        /*Method calculates and returns the total to the caller from 2 
-        * numbers and the associated operator. 
+        /*Calculates the Total based on what operator was used
         */
         private int calculateTotal(string op, int num1, int num2)
         {
@@ -317,7 +334,6 @@ namespace CountDownApp
                 default: throw new Exception("Invalid Logic");
             }
         }
-
 
         /*Gets the index of each button and divides its contents against the value
         * the user picked first or the _total, then checks to see if it divides evenly
@@ -353,7 +369,6 @@ namespace CountDownApp
             }
         }
 
-
         /*Starts the Timer in an intervals of 1 sec
         */
         private void startTimer()
@@ -362,7 +377,6 @@ namespace CountDownApp
             _countDownTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             _countDownTimer.Start();
         }
-
 
         /*if the timers _countTicks is equal to -1 reset the game;
         */
@@ -382,8 +396,6 @@ namespace CountDownApp
                 _countDownTimer.Tick -= numTimer_Tick;
             }
         }
-
-
 
         /*Sets up the Clocks Markers(numbers) at runTime into TextBlocks
         */
@@ -422,31 +434,25 @@ namespace CountDownApp
             }
         }
 
-
+        /*Navigates the use to another page
+        */
         private void BtnNxtLvl_Click(object sender, RoutedEventArgs e)
         {
-            if (++App._NumOfGames == 10)
-                Frame.Navigate(typeof(MainPage));
+            //if the game is over
+            if (--App._NumOfGames < 1)
+            {
+                App._GameOver = true;
+                Frame.Navigate(typeof(ScoreBoardGamePage));
+            }
             else
                 Frame.Navigate(typeof(WordGamePage));
         }
 
-
-
-
-
-
-
-        private void resetGame()
+        /*Quit Button
+        */
+        private void BtnQuitLvl_Click(object sender, RoutedEventArgs e)
         {
-            _countDownTimer.Stop();
-            _countTicks = 28;
-            ShowStoryboardAnimation.Stop();
-            //foreach (Button b in _btnNumLst)
-            //{
-            //    b.Content = "";
-            //}
-            //_btnLoc = 0;
+            Frame.Navigate(typeof(MainPage));
         }
 
     }

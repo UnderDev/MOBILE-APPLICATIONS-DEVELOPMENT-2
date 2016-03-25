@@ -23,7 +23,8 @@ namespace CountDownApp
     public sealed partial class MainPage : Page
     {
 
-        DispatcherTimer imgTimer = new DispatcherTimer();
+        private DispatcherTimer imgTimer = new DispatcherTimer();
+        private int _countTicks = 2, _btnNum = 0;
 
         public MainPage()
         {
@@ -32,62 +33,67 @@ namespace CountDownApp
             //Load all the words into _ListOfWords
             App.load();
 
-            while (App.check == false)
+            //W8 till all the contents of the files are loaded
+            while (App._checkLoaded == false)
             {
             }
         }
 
 
+        /*Click event to find what button the use clicked
+        */
         private void MenuChoice_Click(object sender, RoutedEventArgs e)
         {
-            Button btnMenu =  (Button)sender;
+            Button btnMenu = (Button)sender;
             animatedImage_ImageOpened();
-            startAnimation();
 
             String name = btnMenu.Name;
-            int btnNum = Convert.ToInt16(name.Substring(name.Length-1));
-
-            MenuNavigation(btnNum);
+            _btnNum = Convert.ToInt16(name.Substring(name.Length - 1));
+            startAnimation();
         }
 
-        private Boolean MenuNavigation(int btnNum)
+
+        /*Navigates to a new page depending on what button the user clicked
+        */
+        private Boolean MenuNavigation()
         {
-
-            if (btnNum == 1)
-                App._NumOfGames = 10;
-            else if(btnNum == 2)
-                App._NumOfGames = 1000;
-
-            switch (btnNum)
+            switch (_btnNum)
             {
                 case 0: return (Frame.Navigate(typeof(WordGamePage)));
                 case 1: return (Frame.Navigate(typeof(WordGamePage)));
-                //case 2: return (Frame.Navigate(typeof(RulesGamePage)));
-                //case 3: return (Frame.Navigate(typeof(ScoreGamePage)));
+                case 2: return (Frame.Navigate(typeof(ScoreBoardGamePage)));
                 default: throw new Exception("Cant Navigate To Page");
             }
         }
 
+
+        /*Starts the animation 
+        */
         private void startAnimation()
         {
             //after 2 seconds and the timer stops navigate to the new page
             imgTimer.Tick += imgTimer_Tick;
-            imgTimer.Interval = new TimeSpan(0, 0, 0, 2, 0);
+            imgTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             imgTimer.Start();
 
-            btnSinglePlayer0.Visibility = Visibility.Collapsed;
-            btnMultiPlayer1.Visibility = Visibility.Collapsed;
-            btnRules2.Visibility = Visibility.Collapsed;
-            btnScoreBoard3.Visibility = Visibility.Collapsed;
+            ContentPanel.Visibility = Visibility.Collapsed;
         }
 
-        void imgTimer_Tick(object sender, object e)
+
+        /*Tick event for counting down then calling the method below when the timer is -1
+        */
+        private void imgTimer_Tick(object sender, object e)
         {
-            imgTimer.Stop();
-          //  Frame.Navigate(typeof(WordGamePage));
+            _countTicks--;
+            if (_countTicks == -1)
+            {
+                imgTimer.Stop();
+                imgTimer.Tick -= imgTimer_Tick;
+                MenuNavigation();
+            }
         }
 
-        public void animatedImage_ImageOpened()
+        private void animatedImage_ImageOpened()
         {
             ShowStoryboard.Begin();//Start the Animation 
         }

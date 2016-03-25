@@ -224,19 +224,17 @@ namespace CountDownApp
             //Searches the _wordsList for the word entered by the user(To lowercase) and gives its index
             int _index = App._wordsList.BinarySearch(word.ToLower());
 
-          
-                //If the word is found in App._wordsList
-                if (_index >= 0)
-                {
-                    //Gets the words length and adds it to the users Score
-                    App._userScore += word.Length;
-                    UsrScoreTxtBox.Text = App._userScore.ToString();
-                    WordNotFoundTxtBox.Text = "\"" + word + "\" Found! Score: " + word.Length;
-                }
-                else
-                    WordNotFoundTxtBox.Text = "\"" + word + "\" Was not found in the Dictonary!";
+            //If the word is found in App._wordsList
+            if (_index >= 0)
+            {
+                //Gets the words length and adds it to the users Score
+                App._UserScore += word.Length;
+                WordNotFoundTxtBox.Text = "\"" + word + "\" Found! Score: " + word.Length;
             }
-        
+            else
+                WordNotFoundTxtBox.Text = "\"" + word + "\" Was not found in the Dictonary!";         
+        }
+
 
 
         /*Listens for the KeyDownEvent "EnterKey" then calls the click event below
@@ -277,21 +275,23 @@ namespace CountDownApp
                 _countDownTimer.Stop();
                 _countDownTimer.Tick -= numTimer_Tick;
 
-                EnableAllUserWords();
-
                 //Prevents the Message button been added if the user came up with some words
-                if (UsersWordsList.FindName("word0")==null)
+                if (UsersWordsList.FindName("word0") == null)
                 {
                     _timesUp = true;
                     CreateBtnsRunTime(_timesUp);
                 }
+
+                //Enable all the words the user Had entered
+                EnableAllUserWords();
+
             }
         }
 
         //Enables all the Stackpannels children buttons
         private void EnableAllUserWords()
         {
-            foreach(Button b in UsersWordsList.Children)
+            foreach (Button b in UsersWordsList.Children)
             {
                 b.IsEnabled = true;
             }
@@ -352,7 +352,8 @@ namespace CountDownApp
             btnWord.HorizontalAlignment = HorizontalAlignment.Center;
             btnWord.BorderThickness = new Thickness(1, 1, 1, 1);
             btnWord.IsEnabled = false;
-        
+            
+
             if (timeUp)
                 btnWord.Content = "No Words, Click here to Continue";
             else
@@ -369,22 +370,28 @@ namespace CountDownApp
         private void BtnWord_Click(object sender, RoutedEventArgs e)
         {
             Button btnWord = (Button)sender;
-            SPScores.Visibility = Visibility.Visible;
-            SPNextGame.Visibility = Visibility.Visible;
-            WordNotFoundTxtBox.Visibility = Visibility.Visible;
-
+            SpResultsLayout.Visibility = Visibility.Visible;
             UsersWordsList.Visibility = Visibility.Collapsed;
 
-            if(!_timesUp)
-            chkWordValidity(btnWord.Content.ToString());
+            if (!_timesUp)
+                chkWordValidity(btnWord.Content.ToString());
 
+            UsrScoreTxtBox.Text = App._UserScore.ToString();
             SPMessage.Visibility = Visibility.Collapsed;
         }
 
-        //Navigate to The numbers game page
+        /*Navigates Back to the main page
+        */
+        private void BtnQuitLvl_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        /*Navigate to The numbers game page
+        */
         private void BtnNxtLvl_Click(object sender, RoutedEventArgs e)
         {
-            App._NumOfGames++;
+            App._NumOfGames--;
             Frame.Navigate(typeof(NumberGamePage));
         }
 

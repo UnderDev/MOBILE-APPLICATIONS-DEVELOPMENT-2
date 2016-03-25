@@ -6,6 +6,78 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="MenuStyle" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledTransparentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle Margin="0,1,0,-6" Stroke="Black" RadiusY="12.5" RadiusX="12.5" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" StrokeThickness="3" Fill="#FF3C56C5"/>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0,2,0,-2"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -20,10 +92,19 @@
             <ColumnDefinition Width=".5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
+            <Image  x:Name="imgCountDownLogo"
+                    Source="Assets/CountDownBg.jpg"
+                    Width="Auto"
+                    Height="Auto"
+                    Stretch="None" 
+                    Visibility="Visible"/>
+        </StackPanel>
+
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Image x:Name="animatedImage" Stretch="Fill" Opacity="0" Visibility="Visible" Source="Assets/CountDownLogo.png" Margin="250,150,250,150"/>
         </StackPanel>
-        
+
         <StackPanel>
             <StackPanel.Resources >
                 <Storyboard x:Name="ShowStoryboard" >
@@ -32,35 +113,23 @@
                                  Storyboard.TargetProperty="Opacity"
                                  From="0.0" 
                                  To="2.0" 
-                                 Duration="0:0:1"
+                                 Duration="0:0:1.5"
                                  AutoReverse="True"/>
                 </Storyboard>
             </StackPanel.Resources>
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
-            <Image  x:Name="imgCountDownLogo"
-                    Source="Assets/CountDownBg.jpg"
-                    Width="Auto"
-                    Height="Auto"
-                    Stretch="None" />
-        </StackPanel>
 
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"  Visibility="Visible">
 
+            <Button x:Name="btnSinglePlayer0" Content="Play" Click="MenuChoice_Click" FontSize="35" Foreground="White"
+                    Width="330" FontFamily="Stencil Std" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}" />
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" >
+            <Button x:Name="btnRules1" Content="Rules" Click="MenuChoice_Click" FontSize="35" Foreground="White"
+                    Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" Background="{x:Null}"  Style="{StaticResource MenuStyle}" />
 
-            <Button x:Name="btnSinglePlayer0" Content="Play Normal" Click="MenuChoice_Click" FontSize="35" Foreground="Black"
-                    Width="330" FontFamily="Stencil Std" Padding="0,20,0,0"/>
-
-            <Button x:Name="btnMultiPlayer1" Content="Continuious" Click="MenuChoice_Click" FontSize="35" Foreground="Black"
-                    Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0"/>
-
-            <Button x:Name="btnRules2" Content="Rules" Click="MenuChoice_Click" FontSize="35" Foreground="Black" Width="330" 
-                    FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" />
-
-            <Button x:Name="btnScoreBoard3" Content="ScoreBoard" Click="MenuChoice_Click" FontSize="35" Foreground="Black" Width="330" 
-                    FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" />
+            <Button x:Name="btnScoreBoard2" Content="ScoreBoard" Click="MenuChoice_Click" FontSize="35" Foreground="White"
+                    Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}" />
         </StackPanel>
 
     </Grid>

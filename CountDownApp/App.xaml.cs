@@ -25,11 +25,25 @@ namespace CountDownApp
     /// </summary>
     sealed partial class App : Application
     {
-        public static bool check { get; private set; }
+        public static bool _checkLoaded { get; private set; }
         public static List<string> _wordsList { get; private set; } = new List<string>();
+        public static List<TextBox> _TextBoxScores { get; private set; } = new List<TextBox>(10);
 
-        public static int _userScore = 0;
-        public static int _NumOfGames { get; set; }
+        public static Dictionary<string, int> _UserScoreBoard { get; set; } = new Dictionary<string, int>();
+
+        public static int _UserScore { get; set; }
+        public static int _NumOfGames = 4;
+        public static bool _GameOver = false;
+
+        private static StorageFolder folderRoaming = ApplicationData.Current.RoamingFolder;
+        private static StorageFolder folderLocal = ApplicationData.Current.LocalFolder;
+        private static StorageFile fileLocal;
+        private static string fileName = "ScoreBoard.txt";
+        private static string fileContents;
+
+
+
+
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -58,14 +72,80 @@ namespace CountDownApp
                     _wordsList.Add(line); // Add to list line by line
                 }
             }
-            check = true;//check its all read in and finished
+            _checkLoaded = true;//check its all read in and finished
         }//end
 
         public static async void load()
         {
-            //w8 till ReadFromFile() is finished
+            //w8 till ReadFromFile() and ScoreBoardFileIO() is finished
             await Task.Run(() => ReadFromFile());
+            await Task.Run(() => CreateReadFile());
         }//load
+
+
+
+        public static async void CreateReadFile()
+        {
+            Boolean filePresent = false;
+            /*
+             * Try to create a file from (App.fileName)
+             * Write to that file whats stored in var fileContents
+            */
+            try
+            {
+                fileLocal = await folderLocal.CreateFileAsync(fileName);
+                filePresent = false;
+                // await FileIO.WriteTextAsync(fileLocal, fileContents);
+            }
+            //If file is there throw an exception
+            catch (Exception)
+            {
+                filePresent = true;
+            }
+
+
+            if (filePresent)
+            {
+                //Get the file and read in its contents, and store in var textLocal
+                fileLocal = await folderLocal.GetFileAsync(fileName);
+                string textLocal = await FileIO.ReadTextAsync(fileLocal);
+
+                string[] splitStr;
+                splitStr = textLocal.Split(',');
+                _UserScoreBoard.Clear();
+
+                for (int i = 0; i <= splitStr.Length - 2; i += 2)
+                {
+                    if(!(splitStr[i].Equals(" ")))
+                    _UserScoreBoard.Add(splitStr[i], Convert.ToUInt16(splitStr[i + 1]));
+                }
+            }
+        }
+
+        private static async void ReadFile()
+        {
+            fileLocal = await folderLocal.GetFileAsync(App.fileName);
+
+            string textLocal = await FileIO.ReadTextAsync(fileLocal);
+            fileContents = textLocal;
+
+            fileLocal = null;
+        }
+
+
+        public static async void WriteToFile(string newScoreBoard)
+        {
+               await FileIO.WriteTextAsync(fileLocal, newScoreBoard);               
+        }
+
+
+
+
+
+
+
+
+
 
 
 
