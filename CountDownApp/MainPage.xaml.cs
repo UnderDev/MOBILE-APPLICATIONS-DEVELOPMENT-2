@@ -46,7 +46,6 @@ namespace CountDownApp
 
             btnSinglePlayer.Visibility = Visibility.Collapsed;
             btnMultiPlayer.Visibility = Visibility.Collapsed;
-            btnRules.Visibility = Visibility.Collapsed;
         }
 
         void imgTimer_Tick(object sender, object e)

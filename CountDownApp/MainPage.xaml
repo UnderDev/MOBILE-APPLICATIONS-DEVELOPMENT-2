@@ -55,9 +55,6 @@
 
             <Button x:Name="btnMultiPlayer" Content="MultiPlayer" Click="btnMultiPlayer_Click" FontSize="35" Foreground="Black"
                     Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0"/>
-
-            <Button x:Name="btnRules" Content="Rules" Click="btnRules_Click" FontSize="35" Foreground="Black" Width="330" 
-                    FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" />
         </StackPanel>
 
     </Grid>
