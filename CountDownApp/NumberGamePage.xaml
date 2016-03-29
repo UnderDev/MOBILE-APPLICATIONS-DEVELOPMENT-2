@@ -7,6 +7,70 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Page.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundBaseLowBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundTransparentBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Rectangle RadiusY="21.583" RadiusX="21.583" Stroke="Black" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition">
+                                <Rectangle.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF711D3E" Offset="0.006"/>
+                                        <GradientStop Color="White" Offset="1"/>
+                                        <GradientStop Color="#FFB68B9C" Offset="0.977"/>
+                                        <GradientStop Color="#FF87415D" Offset="0.688"/>
+                                    </LinearGradientBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Margin="-1,-1,-2,-2" Foreground="White"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -41,129 +105,60 @@
                     Stretch="None" />
         </StackPanel>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" Width="385" Height="370">
-
-            <StackPanel Name="SpLayout" Visibility="Visible">
-                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="Visible">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal" >
-                            <TextBox x:Name="txtBoxMathTotals" TextWrapping="Wrap" Width="58" Height="140" 
-                     IsReadOnly="True" IsEnabled="False" FontSize="15" Padding="0,10,0,0"  Background="#FFD1D1D1" TextAlignment="Center" BorderThickness="2,2,0,2" MinWidth="0" MinHeight="0" FontWeight="Bold"/>
-
-                            <TextBox x:Name="txtBoxMathsSigns" TextWrapping="Wrap" Width="20" Height="140" TextAlignment="Center" 
-                     IsReadOnly="True" IsEnabled="False" FontSize="15" Padding="0,10,0,0"  Background="#FFD1D1D1" MinHeight="0" MinWidth="0" BorderThickness="0,2" FontWeight="Bold"/>
-
-                            <TextBox x:Name="txtBoxMathsNum" TextWrapping="Wrap" Width="32" Height="140" TextAlignment="Center" 
-                     IsReadOnly="True" IsEnabled="False" FontSize="15" Padding="0,10,0,0"  Background="#FFD1D1D1" MinHeight="0" MinWidth="0" BorderThickness="0,2" FontWeight="Bold"/>
-
-                            <TextBox x:Name="txtBoxMathsEquals" TextWrapping="Wrap" Width="20" Height="140" TextAlignment="Center" 
-                     IsReadOnly="True" IsEnabled="False" FontSize="15" Padding="0,10,0,0"  Background="#FFD1D1D1" MinHeight="0" MinWidth="0" BorderThickness="0,2" FontWeight="Bold"/>
-
-                            <TextBox x:Name="txtBoxMathTotal" TextWrapping="Wrap"  Width="58" Height="140" TextAlignment="Center" 
-                     IsReadOnly="True" IsEnabled="False" FontSize="15" Padding="0,10,0,0"  Background="#FFD1D1D1" BorderThickness="0,2,2,2" MinWidth="0" MinHeight="0" FontWeight="Bold"/>
-                        </StackPanel>
-
-                        <TextBox x:Name="txtBoxTotal"  TextWrapping="Wrap" TextAlignment="Center" 
-                     IsReadOnly="True" IsEnabled="False" FontSize="35" Text="Total" Style="{StaticResource TotTarBoxStyle}"/>
-                    </StackPanel>
-
-                    <StackPanel Margin="5,0,0,0"  >
-                        <StackPanel Margin="0,0,0,10" >
-                            <Border CornerRadius="180" BorderThickness="3" BorderBrush="Black" Background="LightGray" Width="130" Height="130">
-                                <Canvas x:Name="MarkersCanvas" Width="130" Height="130" >
-                                    <StackPanel Width="125" Height="125" Orientation="Horizontal">
-
-                                        <Line x:Name="clockHand" X1="10" Y1="-.5" X2="7" Y2="58" StrokeThickness="1.5" Stroke="Black" RenderTransformOrigin="1,1"  VerticalAlignment="Top" 
-                                      Width="10" Height="57" Margin="52,5,0,0">
-                                            <Line.RenderTransform>
-                                                <CompositeTransform x:Name="rotate" Rotation="0"/>
-                                            </Line.RenderTransform>
-                                        </Line>
-
-                                        <Line x:Name="clockHand1" X1="-.5" Y1="0" X2="3" Y2="58" StrokeThickness="1.5" Stroke="Black" RenderTransformOrigin="0,1"  VerticalAlignment="Top"
-                                        Width="10" Height="57" Margin="0,5,0,0">
-                                            <Line.RenderTransform>
-                                                <CompositeTransform x:Name="rotate1" Rotation="0"/>
-                                            </Line.RenderTransform>
-                                        </Line>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Horizontal" Width="130" Height="130" Padding="57,0,0,6">
-                                        <Ellipse x:Name="center" Fill="#FF9A3131" Stroke="Black" Width="10" Height="10"  >
-                                        </Ellipse>
-                                    </StackPanel>
-
-                                </Canvas>
-                            </Border>
-                        </StackPanel>
-
-                        <TextBox x:Name="txtBoxTarget"  TextWrapping="Wrap" TextAlignment="Center"
-                     IsReadOnly="True" IsEnabled="False" FontSize="35" Text="Target" Style="{StaticResource TotTarBoxStyle}"/>
-                    </StackPanel>
-                </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Margin="0,0,0,5" Orientation="Horizontal">
 
                 <StackPanel>
-                    <StackPanel.Resources >
-                        <Storyboard x:Name="ShowStoryboardAnimation" >
-                            <DoubleAnimation Storyboard.TargetName="clockHand"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
-                            <DoubleAnimation Storyboard.TargetName="clockHand1"  Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" From="0" To="180" Duration="0:0:30"/>
-                        </Storyboard>
-                    </StackPanel.Resources>
+                    <TextBox x:Name="txtBoxMaths"  TextWrapping="Wrap"  Width="190" Height="140" TextAlignment="Left"
+                     IsReadOnly="True" IsEnabled="False" FontSize="20" Padding="40,0,0,0"/>
+
+                    <TextBox x:Name="txtBoxTotal"  TextWrapping="Wrap"  Width="190" Height="55" TextAlignment="Center" Margin="0,5,0,0"
+                     IsReadOnly="True" IsEnabled="False" FontSize="35" Text="Total"/>
                 </StackPanel>
 
-
-
-                <StackPanel x:Name="stkPanNum"  Orientation="Horizontal" Visibility="Visible">
-                    <Button x:Name="btnNumBox0" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Style="{StaticResource LetterNumButtons}"/>
-                    <Button x:Name="btnNumBox1" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Style="{StaticResource LetterNumButtons}"/>
-                    <Button x:Name="btnNumBox2" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Style="{StaticResource LetterNumButtons}"/>
-                    <Button x:Name="btnNumBox3" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Style="{StaticResource LetterNumButtons}"/>
-                    <Button x:Name="btnNumBox4" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Style="{StaticResource LetterNumButtons}"/>
-                    <Button x:Name="btnNumBox5" Height="50" Width="60" FontSize="20"                  Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Style="{StaticResource LetterNumButtons}"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <StackPanel x:Name="stkPanOperators" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,0,0,5">
-                        <Button x:Name="btnOpBox0" Height="50" Width="60" FontSize="25" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Content="+" Style="{StaticResource LetterNumButtons}"/>
-                        <Button x:Name="btnOpBox1" Height="50" Width="60" FontSize="25" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Content="-" Style="{StaticResource LetterNumButtons}"/>
-                        <Button x:Name="btnOpBox2" Height="50" Width="60" FontSize="25" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Content="÷" Style="{StaticResource LetterNumButtons}"/>
-                        <Button x:Name="btnOpBox3" Height="50" Width="60" FontSize="25"                  Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Content="*" Style="{StaticResource LetterNumButtons}"/>
-                    </StackPanel>
-
-                    <StackPanel x:Name="stkPanReset"  Orientation="Horizontal"  HorizontalAlignment="Right" Margin="5,0,0,5" Visibility="Collapsed">
-                        <Button x:Name="btnReset" Content="Reset" FontSize="25" IsEnabled="True" BorderBrush="Black" FontFamily="Stencil" Background="#FFCACACA" Click="btnReset_Click" Style="{StaticResource NumSmalBtn}"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <StackPanel x:Name="stkPanNumBtns"  Orientation="Horizontal" Margin="0,0,0,5" Visibility="Visible">
-                    <Button x:Name="btnLargeNum"  FontSize="21" Margin="0,0,135,0" Click="NumChoiceBtn_Click" IsEnabled="True" FontFamily="Stencil" Foreground="#FF4352C5" Content="Large Num" Style="{StaticResource NumSmalBtn}" />
-                    <Button x:Name="btnSmallNum"  FontSize="21"                  Click="NumChoiceBtn_Click" IsEnabled="True" FontFamily="Stencil" Foreground="#FF4352C5" Content="Small Num" Style="{StaticResource NumSmalBtn}"/>
-                </StackPanel>
-
-                <StackPanel x:Name="SPResultsBtn" Visibility="Collapsed">
-                    <Button x:Name="BtnResults" Height="50" Width="386" FontSize="24"  Click="BtnResults_Click" IsEnabled="True" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF4352C5" 
-                    Content="Get Results"/>
+                <StackPanel Margin="5,0,0,0"  >
+                    <TextBox x:Name="txtBoxCountDown"  TextWrapping="Wrap"  Width="190" Height="97" TextAlignment="Center" Padding="0,20,0,0" 
+                     IsReadOnly="True" IsEnabled="False" FontSize="40"/>
+                    
+                    <TextBox  TextWrapping="Wrap"  Width="190" Height="54" TextAlignment="Center"  
+                     IsReadOnly="True" IsEnabled="False" FontSize="24" Text="Target" Margin="0,5,0,0" BorderThickness="2" Padding="8"  />
+                                  
+                    <TextBox x:Name="txtBoxTarget"  TextWrapping="Wrap"  Width="190"  TextAlignment="Center" Padding="0" 
+                     IsReadOnly="True" IsEnabled="False" FontSize="31" Text="577"/>
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Name="SpResultsLayout" Visibility="Collapsed">
-                <TextBlock Name="NumAwayTxtBox"  FontSize="20" Text="" TextAlignment="Center" FontWeight="Bold" Foreground="#FFF0EAEA" Margin="0,100,0,10" />
 
-                <StackPanel x:Name="SPScores" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,0,0,10"  Width="150" BorderThickness="2" BorderBrush="Black" Background="#FFBFBFBF" CornerRadius="3" >
+            <StackPanel x:Name="stkPanNum"  Orientation="Horizontal">
+                <Button x:Name="btnNumBox0" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+                <Button x:Name="btnNumBox1" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+                <Button x:Name="btnNumBox2" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+                <Button x:Name="btnNumBox3" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+                <Button x:Name="btnNumBox4" Height="50" Width="60" FontSize="20" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+                <Button x:Name="btnNumBox5" Height="50" Width="60" FontSize="20"                  Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B"/>
+            </StackPanel>
 
-                    <TextBlock FontSize="20" Text="HighScore" TextAlignment="Center" FontWeight="Bold" Foreground="#FF3342AD" SelectionHighlightColor="{x:Null}"  />
-                    <StackPanel Background="White" CornerRadius="3" Width="145" Margin="-.1,0,0,0">
-                        <TextBlock Name="UsrScoreTxtBox" FontSize="20" Text="0" TextAlignment="Center" FontWeight="Bold" Foreground="#FFF31010" SelectionHighlightColor="{x:Null}" />
-                    </StackPanel>
-                </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <StackPanel x:Name="stkPanOperators" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
+                <Button x:Name="btnOpBox0" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" Content="+"/>
+                <Button x:Name="btnOpBox1" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" Content="-"/>
+                <Button x:Name="btnOpBox2" Height="50" Width="60" FontSize="26" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" Content="÷"/>
+                <Button x:Name="btnOpBox3" Height="50" Width="60" FontSize="26"                  Click="AddBtnContToTxtBox_Click" IsEnabled="False" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" Content="*"/>
+            </StackPanel>
 
-                <StackPanel x:Name="SPNextGame" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,10,0,10">
-                    <Button Name="BtnNxtLvl" Height="30" Width="150" Content="Next Level" FontWeight="Bold" Foreground="#FFF0EAEA"  Click="BtnNxtLvl_Click"  Style="{StaticResource EnterResetBtn}" />
-                </StackPanel>
+            <StackPanel x:Name="stkPanReset"  Orientation="Horizontal"  HorizontalAlignment="Right" Margin="5,0,0,0" Visibility="Collapsed">
+                <Button x:Name="btnReset" Content="Reset" Height="50" Width="125" FontSize="26" IsEnabled="True" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" Click="btnReset_Click"/>
+            </StackPanel>
+            </StackPanel>
 
-                <StackPanel x:Name="SPQuitGame" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,10,0,10">
-                    <Button Name="BtnQuitLvl" Height="30" Width="150" Content="Quit Game" FontWeight="Bold"  Margin="0" Click="BtnQuitLvl_Click"  Style="{StaticResource EnterResetBtn}" />
-                </StackPanel>
+            <StackPanel x:Name="stkPanNumBtns"  Orientation="Horizontal" Margin="0,5,0,5" Visibility="Visible">
+                <Button x:Name="btnLargeNum" Height="50" Width="155" FontSize="24" Margin="0,0,75,0" Click="NumChoiceBtn_Click" HorizontalAlignment="Right" IsEnabled="True" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" Content="Large Num" />
+                <Button x:Name="btnSmallNum" Height="50" Width="155" FontSize="24"                   Click="NumChoiceBtn_Click" IsEnabled="True" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" Content="Small Num"/>
+            </StackPanel>
+
+            <StackPanel x:Name="stkPanEnterBtn" Visibility="Visible">
+                <Button x:Name="btnEnter" Height="50" Width="386" FontSize="24"  Click="EnterBtn_Click" IsEnabled="True" BorderBrush="Black" BorderThickness="3" FontFamily="Stencil" Background="#FFCACACA" Foreground="#FF752F4B" 
+                    Content="Enter"/>
             </StackPanel>
         </StackPanel>
 
