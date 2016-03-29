@@ -30,6 +30,7 @@ namespace CountDownApp
         {
             this.InitializeComponent();
 
+            App._UserScore = 0;
             //Load all the words into _ListOfWords
             App.load();
 

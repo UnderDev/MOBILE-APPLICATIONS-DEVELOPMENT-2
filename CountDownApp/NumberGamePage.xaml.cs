@@ -441,7 +441,7 @@ namespace CountDownApp
             //if the game is over
             if (--App._NumOfGames < 1)
             {
-                App._GameOver = true;
+                App._GameOver = true;               
                 Frame.Navigate(typeof(ScoreBoardGamePage));
             }
             else

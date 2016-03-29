@@ -32,14 +32,14 @@ namespace CountDownApp
         public static Dictionary<string, int> _UserScoreBoard { get; set; } = new Dictionary<string, int>();
 
         public static int _UserScore { get; set; }
-        public static int _NumOfGames = 4;
+        public static int _NumOfGames = 2;
         public static bool _GameOver = false;
 
         private static StorageFolder folderRoaming = ApplicationData.Current.RoamingFolder;
         private static StorageFolder folderLocal = ApplicationData.Current.LocalFolder;
         private static StorageFile fileLocal;
         private static string fileName = "ScoreBoard.txt";
-        private static string fileContents;
+        private static string fileContents="";
 
 
 
@@ -122,34 +122,11 @@ namespace CountDownApp
             }
         }
 
-        private static async void ReadFile()
-        {
-            fileLocal = await folderLocal.GetFileAsync(App.fileName);
-
-            string textLocal = await FileIO.ReadTextAsync(fileLocal);
-            fileContents = textLocal;
-
-            fileLocal = null;
-        }
-
 
         public static async void WriteToFile(string newScoreBoard)
         {
                await FileIO.WriteTextAsync(fileLocal, newScoreBoard);               
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
