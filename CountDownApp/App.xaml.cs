@@ -25,16 +25,26 @@ namespace CountDownApp
     /// </summary>
     sealed partial class App : Application
     {
-        public static bool check { get; private set; }
+        public static bool _checkLoaded { get; private set; }
         public static List<string> _wordsList { get; private set; } = new List<string>();
+        public static List<TextBox> _TextBoxScores { get; private set; } = new List<TextBox>(10);
 
-        public static int _userScore { get; set; }
+        public static Dictionary<string, int> _UserScoreBoard { get; set; } = new Dictionary<string, int>();
 
-        public static DispatcherTimer _countDownTimer = new DispatcherTimer();
-       // private int _countTicks = 28;
+        public static int _UserScore { get; set; }
+        public static int _NumOfGames = 2;
+        public static bool _GameOver = false;
 
-        public static int _countTicks { get; set; }
-        
+        private static StorageFolder folderRoaming = ApplicationData.Current.RoamingFolder;
+        private static StorageFolder folderLocal = ApplicationData.Current.LocalFolder;
+        private static StorageFile fileLocal;
+        private static string fileName = "ScoreBoard.txt";
+        private static string fileContents="";
+
+
+
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -47,7 +57,6 @@ namespace CountDownApp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-            _countTicks = 30;
         }
 
         //reads from the file line by line into a List<String>
@@ -57,23 +66,67 @@ namespace CountDownApp
 
             using (StreamReader reader = new StreamReader(await _file.OpenStreamForReadAsync()))
             {
-                string _line;
-                while ((_line = reader.ReadLine()) != null)
+                string line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    _wordsList.Add(_line); // Add to list line by line
+                    _wordsList.Add(line); // Add to list line by line
                 }
             }
-            check = true;//check its all read in and finished
+            _checkLoaded = true;//check its all read in and finished
         }//end
 
         public static async void load()
         {
-            //w8 till ReadFromFile() is finished
+            //w8 till ReadFromFile() and ScoreBoardFileIO() is finished
             await Task.Run(() => ReadFromFile());
+            await Task.Run(() => CreateReadFile());
         }//load
 
 
 
+        public static async void CreateReadFile()
+        {
+            Boolean filePresent = false;
+            /*
+             * Try to create a file from (App.fileName)
+             * Write to that file whats stored in var fileContents
+            */
+            try
+            {
+                fileLocal = await folderLocal.CreateFileAsync(fileName);
+                filePresent = false;
+                // await FileIO.WriteTextAsync(fileLocal, fileContents);
+            }
+            //If file is there throw an exception
+            catch (Exception)
+            {
+                filePresent = true;
+            }
+
+
+            if (filePresent)
+            {
+                //Get the file and read in its contents, and store in var textLocal
+                fileLocal = await folderLocal.GetFileAsync(fileName);
+                string textLocal = await FileIO.ReadTextAsync(fileLocal);
+
+                string[] splitStr;
+                splitStr = textLocal.Split(',');
+                _UserScoreBoard.Clear();
+
+                for (int i = 0; i <= splitStr.Length - 2; i += 2)
+                {
+                    if(!(splitStr[i].Equals(" ")))
+                    _UserScoreBoard.Add(splitStr[i], Convert.ToUInt16(splitStr[i + 1]));
+                }
+            }
+        }
+
+
+        public static async void WriteToFile(string newScoreBoard)
+        {
+               await FileIO.WriteTextAsync(fileLocal, newScoreBoard);               
+        }
 
 
 
