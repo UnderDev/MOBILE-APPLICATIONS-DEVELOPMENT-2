@@ -101,9 +101,6 @@
     <Compile Include="NumberGamePage.xaml.cs">
       <DependentUpon>NumberGamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScoreBoardGamePage.xaml.cs">
-      <DependentUpon>ScoreBoardGamePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WordGamePage.xaml.cs">
       <DependentUpon>WordGamePage.xaml</DependentUpon>
     </Compile>
@@ -140,10 +137,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="NumberGamePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ScoreBoardGamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
