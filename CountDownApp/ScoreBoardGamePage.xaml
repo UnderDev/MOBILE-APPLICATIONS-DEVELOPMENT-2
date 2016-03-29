@@ -1,0 +1,66 @@
+<Page
+    x:Class="CountDownApp.ScoreBoardGamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CountDownApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"></ColumnDefinition>
+            <ColumnDefinition Width="9*"></ColumnDefinition>
+            <ColumnDefinition Width=".5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
+            <Image  x:Name="imgCountDownLogo"
+                    Source="Assets/CountDownBg.jpg"
+                    Width="Auto"
+                    Height="Auto"
+                    Stretch="None" 
+                    Visibility="Visible"/>
+        </StackPanel>
+
+
+        <StackPanel Name="SpScoreBoardContent" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"  Visibility="Visible" Margin="0,0,0,0" BorderBrush="Black" BorderThickness="2">
+            <TextBox TextWrapping="Wrap" Height="45" Width="400" TextAlignment="Center" Text="Score Board" Style="{StaticResource ScoreBoardHeader}" Foreground="{x:Null}" IsReadOnly="True" Padding="0"/>
+            <StackPanel x:Name="SPScoreBoard" Orientation="Vertical">
+                <!--TextBoxes get added here at Runtime containing read in contents from local storage-->
+            </StackPanel>
+            
+            <StackPanel Name="SpQuit" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"  Visibility="Visible" >
+                <Button Name="BtnQuit" Height="30" Width="400" Content="Return To Menu" FontWeight="Bold"  Margin="0,5,0,0" BorderThickness="0,2,0,0" Click="BtnQuit_Click" />
+            </StackPanel>
+        </StackPanel>
+
+
+
+        <StackPanel Name="SpScoreBoardHighScore" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"  Visibility="Collapsed" Margin="0,0,0,0" BorderBrush="Black" >
+
+            <StackPanel x:Name="SPScores" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,0,0,10"  Width="300" BorderThickness="1,1" BorderBrush="Black" Background="#FFBFBFBF" CornerRadius="3" >
+                <TextBlock FontSize="20" Text="New HighScore"  TextAlignment="Center" FontWeight="Bold" Foreground="#FF3342AD" SelectionHighlightColor="{x:Null}"  />
+                <StackPanel Background="White" CornerRadius="3" Width="300" Margin="-.1,0,0,0">
+                    <TextBlock Name="UsrScoreTxtBox" FontSize="20" Text="0" TextAlignment="Center" FontWeight="Bold" Foreground="#FFF31010" SelectionHighlightColor="{x:Null}" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel x:Name="SPNextGame" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBox Name="TbUserName" Height="30" Width="300" Text="Enter Your name Here" FontWeight="Bold" Foreground="#FFF0EAEA" TextAlignment="Center" BorderThickness="1,1" GotFocus="TbUserName_GotFocus" LostFocus="TbUserName_LostFocus" AcceptsReturn="True"/>
+            </StackPanel>
+
+            <StackPanel x:Name="SPQuitGame" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <Button Name="BtnContinue" Height="30" Width="300" Content="Continue" FontWeight="Bold"  Margin="0,20,0,0" BorderThickness="1,1" Click="BtnContinue_Click" />
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Page>
