@@ -39,7 +39,6 @@ namespace CountDownApp
         private static StorageFolder folderLocal = ApplicationData.Current.LocalFolder;
         private static StorageFile fileLocal;
         private static string fileName = "ScoreBoard.txt";
-        private static string fileContents="";
 
 
 
@@ -89,13 +88,11 @@ namespace CountDownApp
             Boolean filePresent = false;
             /*
              * Try to create a file from (App.fileName)
-             * Write to that file whats stored in var fileContents
             */
             try
             {
                 fileLocal = await folderLocal.CreateFileAsync(fileName);
                 filePresent = false;
-                // await FileIO.WriteTextAsync(fileLocal, fileContents);
             }
             //If file is there throw an exception
             catch (Exception)
