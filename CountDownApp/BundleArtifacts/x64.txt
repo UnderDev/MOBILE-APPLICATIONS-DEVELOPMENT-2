@@ -1,0 +1,2 @@
+MainPackage=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\bin\x64\Release\CountDownApp_1.1.16.0_x64.appx
+SymbolPackage=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\AppPackages\CountDownApp_1.1.16.0_Test\CountDownApp_1.1.16.0_x64.appxsym
