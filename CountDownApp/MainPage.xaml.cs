@@ -31,13 +31,7 @@ namespace CountDownApp
             this.InitializeComponent();
 
             App._UserScore = 0;
-            //Load all the words into _ListOfWords
-            App.load();
 
-            //W8 till all the contents of the files are loaded
-            while (App._checkLoaded == false)
-            {
-            }
         }
 
 
@@ -50,7 +44,17 @@ namespace CountDownApp
 
             String name = btnMenu.Name;
             _btnNum = Convert.ToInt16(name.Substring(name.Length - 1));
+
+            //Load all the words into _ListOfWords
+            App.load();
+
+            //W8 till all the contents of the files are loaded
+            while (App._checkLoaded == false)
+            {
+            }
+
             startAnimation();
+
         }
 
 
