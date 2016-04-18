@@ -125,10 +125,7 @@
             <Button x:Name="btnSinglePlayer0" Content="Play" Click="MenuChoice_Click" FontSize="35" Foreground="White"
                     Width="330" FontFamily="Stencil Std" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}" />
 
-            <Button x:Name="btnRules1" Content="Rules" Click="MenuChoice_Click" FontSize="35" Foreground="White"
-                    Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" Background="{x:Null}"  Style="{StaticResource MenuStyle}" />
-
-            <Button x:Name="btnScoreBoard2" Content="ScoreBoard" Click="MenuChoice_Click" FontSize="35" Foreground="White"
+            <Button x:Name="btnScoreBoard1" Content="ScoreBoard" Click="MenuChoice_Click" FontSize="35" Foreground="White"
                     Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}" />
         </StackPanel>
 

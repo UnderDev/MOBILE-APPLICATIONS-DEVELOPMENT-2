@@ -61,8 +61,7 @@ namespace CountDownApp
             switch (_btnNum)
             {
                 case 0: return (Frame.Navigate(typeof(WordGamePage)));
-                case 1: return (Frame.Navigate(typeof(WordGamePage)));
-                case 2: return (Frame.Navigate(typeof(ScoreBoardGamePage)));
+                case 1: return (Frame.Navigate(typeof(ScoreBoardGamePage)));
                 default: throw new Exception("Cant Navigate To Page");
             }
         }
