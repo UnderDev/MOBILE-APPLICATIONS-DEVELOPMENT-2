@@ -49,9 +49,9 @@ namespace CountDownApp
             App.load();
 
             //W8 till all the contents of the files are loaded
-            while (App._checkLoaded == false)
-            {
-            }
+            //while (App._checkLoaded == false)
+            //{
+            //}
 
             startAnimation();
 

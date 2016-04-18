@@ -1,5 +1,5 @@
-MainPackage=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\bin\ARM\Release\Upload\CountDownApp_1.1.17.0_ARM.appx
-SymbolPackage=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\AppPackages\CountDownApp_1.1.17.0\CountDownApp_1.1.17.0_ARM.appxsym
+MainPackage=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\bin\ARM\Release\Upload\CountDownApp_1.1.18.0_ARM.appx
+SymbolPackage=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\AppPackages\CountDownApp_1.1.18.0\CountDownApp_1.1.18.0_ARM.appxsym
 ResourcePack=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\_scale-100.appx
 ResourcePack=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\_scale-125.appx
 ResourcePack=C:\Users\scott\Documents\Visual Studio 2015\Projects\CountDownApp\CountDownApp\_scale-150.appx
