@@ -28,13 +28,6 @@ namespace CountDownApp
         public MainPage()
         {
             this.InitializeComponent();
-
-            //load all the words into _ListOfWords
-            App.load();
-
-            while (App.check == false)
-            {
-            }
         }
 
         private void startAnimation()
@@ -44,8 +37,23 @@ namespace CountDownApp
             imgTimer.Interval = new TimeSpan(0, 0, 0, 2, 0);
             imgTimer.Start();
 
+
             btnSinglePlayer.Visibility = Visibility.Collapsed;
             btnMultiPlayer.Visibility = Visibility.Collapsed;
+
+            String name = btnMenu.Name;
+            _btnNum = Convert.ToInt16(name.Substring(name.Length - 1));
+
+            //Load all the words into _ListOfWords
+            App.load();
+
+            //W8 till all the contents of the files are loaded
+            while (App._checkLoaded == false)
+            {
+            }
+
+            startAnimation();
+
         }
 
         void imgTimer_Tick(object sender, object e)
