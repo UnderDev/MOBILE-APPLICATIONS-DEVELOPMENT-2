@@ -31,15 +31,24 @@ namespace CountDownApp
             this.InitializeComponent();
 
             App._UserScore = 0;
-            //Load all the words into _ListOfWords
-            App.load();
-
-            //W8 till all the contents of the files are loaded
-            while (App._checkLoaded == false)
-            {
-            }
+            getCurrentStateSetup(VisualStateGroup.CurrentState.Name);
         }
 
+        private void getCurrentStateSetup(string stateName)
+        {
+            switch (stateName)
+            {
+                case "Phone":
+                    animatedImage.Width = 300;
+                    break;
+                case "Desktop":
+                    animatedImage.Width = 800;
+                    break;
+                case "Tablet":
+                    animatedImage.Width = 450;
+                    break;
+            }
+        }
 
         /*Click event to find what button the use clicked
         */
@@ -71,6 +80,10 @@ namespace CountDownApp
         */
         private void startAnimation()
         {
+
+            //Load all the words into _ListOfWords
+            App.load();
+
             //after 2 seconds and the timer stops navigate to the new page
             imgTimer.Tick += imgTimer_Tick;
             imgTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);

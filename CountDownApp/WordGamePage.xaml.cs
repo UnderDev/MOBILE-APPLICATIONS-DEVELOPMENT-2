@@ -43,8 +43,9 @@ namespace CountDownApp
 
 
        
-        private void getCurrentStateSetup(string stateName) { 
+        private void getCurrentStateSetup(string stateName) {
 
+            removesClockMarkers();
             switch (stateName)
             {
                 case "Phone":
@@ -62,8 +63,7 @@ namespace CountDownApp
                     _btnWidth = 215;
                     _btnfontSize = 13;
                     break;
-            }
-            removesClockMarkers();
+            }            
             setClockMarkers();
         }
 
@@ -414,6 +414,7 @@ namespace CountDownApp
         */
         private void BtnWord_Click(object sender, RoutedEventArgs e)
         {
+            App._NumOfGames++;
             Button btnWord = (Button)sender;
             SpResultsLayout.Visibility = Visibility.Visible;
             UsersWordsList.Visibility = Visibility.Collapsed;
@@ -422,6 +423,7 @@ namespace CountDownApp
                 chkWordValidity(btnWord.Content.ToString());
 
             UsrScoreTxtBox.Text = App._UserScore.ToString();
+            CurrentLvlTxtBox.Text = "Current Lvl - " + App._NumOfGames + "/" + 6;
             SPMessage.Visibility = Visibility.Collapsed;
         }
 
@@ -439,7 +441,6 @@ namespace CountDownApp
         */
         private void BtnNxtLvl_Click(object sender, RoutedEventArgs e)
         {
-            App._NumOfGames--;
             Frame.Navigate(typeof(NumberGamePage));
         }
 

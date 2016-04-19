@@ -66,20 +66,19 @@ namespace CountDownApp
 
         private void getCurrentStateSetup(string stateName)
         {
-
+            removesClockMarkers();
             switch (stateName)
             {
                 case "Phone":
                     _radius = 55;
                     break;
                 case "Desktop":
-                    _radius = 75;
+                    _radius = 55;
                     break;
                 case "Tablet":
-                    _radius = 75;
+                    _radius = 55;
                     break;
             }
-            removesClockMarkers();
             setClockMarkers();
         }
 
@@ -283,7 +282,9 @@ namespace CountDownApp
         */
         private void showScoreBoard(int totAway, int score)
         {
+            App._NumOfGames++;
             NumAwayTxtBox.Text = "You Were " + totAway + " Away! Score: " + score;
+            CurrentLvlTxtBox.Text = "Current Lvl - " + App._NumOfGames + "/"+6 ;
             SpLayout.Visibility = Visibility.Collapsed;
             SpResultsLayout.Visibility = Visibility.Visible;
             UsrScoreTxtBox.Text = Convert.ToString(App._UserScore);
@@ -478,7 +479,7 @@ namespace CountDownApp
         private void BtnNxtLvl_Click(object sender, RoutedEventArgs e)
         {
             //if the game is over
-            if (--App._NumOfGames < 1)
+            if (App._NumOfGames > 5)
             {
                 App._GameOver = true;               
                 Frame.Navigate(typeof(ScoreBoardGamePage));

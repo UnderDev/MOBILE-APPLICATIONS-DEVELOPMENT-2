@@ -32,7 +32,7 @@ namespace CountDownApp
         public static Dictionary<string, int> _UserScoreBoard { get; set; } = new Dictionary<string, int>();
 
         public static int _UserScore { get; set; }
-        public static int _NumOfGames = 8;
+        public static int _NumOfGames = 0;
         public static bool _GameOver = false;
 
         private static StorageFolder folderRoaming = ApplicationData.Current.RoamingFolder;

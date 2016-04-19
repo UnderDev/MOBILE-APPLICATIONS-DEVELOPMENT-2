@@ -71,7 +71,7 @@ namespace CountDownApp
 
                     tb.Style = Application.Current.Resources["ScoreBoardContent"] as Style;
 
-                    tb.Text = pair.Value.ToString().PadRight(14, '-')+ pair.Key.ToUpper();
+                    tb.Text = pair.Value.ToString().PadRight(10, '-')+ pair.Key.ToUpper();
                     App._TextBoxScores.Add(tb);
                 }
             }
