@@ -113,7 +113,7 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle RadiusY="7" RadiusX="7" Stroke="Black" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0" Fill="#FF4E6AAD" Width="160" StrokeThickness="2"/>
+                            <Rectangle RadiusY="7" RadiusX="7" Stroke="Black" d:LayoutOverrides="LeftPosition, RightPosition, TopPosition, BottomPosition" Margin="0" Fill="#FF4E6AAD" StrokeThickness="2"/>
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Foreground="White" d:LayoutOverrides="LeftPosition, RightPosition" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160" Height="50"/>
                         </Grid>
                     </ControlTemplate>
@@ -922,7 +922,7 @@
                                     <VisualState x:Name="ButtonCollapsed"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle Margin="0" RadiusY="4" RadiusX="4" Grid.RowSpan="2" Stroke="Black" Fill="#FFCECECE" StrokeThickness="2" Grid.ColumnSpan="2" Width="270"/>
+                            <Rectangle Margin="0" RadiusY="4" RadiusX="4" Grid.RowSpan="2" Stroke="Black" Fill="#FFCECECE" StrokeThickness="2" Grid.ColumnSpan="2"/>
                             <Border x:Name="BackgroundElement" Margin="0" Opacity="{ThemeResource TextControlBackgroundRestOpacity}" Grid.Row="1" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <ContentPresenter x:Name="HeaderContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" FontWeight="Normal" Grid.Row="0" Visibility="Collapsed" x:DeferLoadStrategy="Lazy" Height="0" Grid.RowSpan="2" VerticalAlignment="Center" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" HorizontalAlignment="Center"/>
                             <ScrollViewer x:Name="ContentElement" AutomationProperties.AccessibilityView="Raw" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsTabStop="False" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" Margin="0" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>

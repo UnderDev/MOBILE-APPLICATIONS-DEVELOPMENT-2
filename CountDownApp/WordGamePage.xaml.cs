@@ -16,6 +16,8 @@ namespace CountDownApp
         private char[] _consonantsArray = new char[21] { 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z' };
         private List<Char> _listAvailLetters = new List<char>();
 
+        private List<TextBlock> _textBlockClockMarkers = new List<TextBlock>();
+
         //Create an Button array that holds 9 Button
         private Button[] _btnArray = new Button[9];
 
@@ -24,6 +26,9 @@ namespace CountDownApp
         private DispatcherTimer _countDownTimer = new DispatcherTimer();
         private int _countTicks = 28;
         private Boolean _timesUp = false;
+        private double _radius = 75;
+        TextBlock _tb;
+
 
 
         public WordGamePage()
@@ -31,6 +36,26 @@ namespace CountDownApp
             this.InitializeComponent();
 
             //Set up the clock
+           // setClockMarkers();  /////////////////////////////************************************** fix
+            getBtnList();
+        }
+
+
+        private void VisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            var stateName = e.NewState.Name;
+
+            switch (stateName)
+            {
+                case "Phone":
+                    _radius = 55;
+                    break;
+                case "Desktop":
+                    break;
+                case "Tablet":
+                    break;
+            }
+            removesClockMarkers();
             setClockMarkers();
         }
 
@@ -40,38 +65,45 @@ namespace CountDownApp
         private void setClockMarkers()
         {
             int num = 5;//Increment in 5s
-
             for (int i = 1; i <= 12; ++i)
             {
-                TextBlock tb = new TextBlock();
+                _tb = new TextBlock();
+                _tb.Text = num.ToString();
 
-                tb.Text = num.ToString();
-
-                tb.TextAlignment = TextAlignment.Center;
-                tb.RenderTransformOrigin = new Point(1, 1);
-                tb.FontSize = 10;
-                tb.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Red);
+                _tb.TextAlignment = TextAlignment.Center;
+                _tb.RenderTransformOrigin = new Point(1, 1);
+                _tb.FontSize = 10;
+                _tb.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Red);
 
                 //sets the Number output to the textblocks in incriments of 5
                 num += 5;
-
-                double radius = 75;
 
                 //Sets the spacing between each of the numbers
                 double angle = Math.PI * i * 30.0 / 180.0;
 
                 //sets the x and y positions of the Circle on the canvas
-                double xPos = Math.Sin(angle) * radius + radius;
-                double yPos = -Math.Cos(angle) * radius + radius; //-Math.Cos important
+                double xPos = Math.Sin(angle) * _radius + _radius;
+                double yPos = -Math.Cos(angle) * _radius + _radius; //-Math.Cos important
 
-                Canvas.SetLeft(tb, xPos);
-                Canvas.SetTop(tb, yPos);
+                Canvas.SetLeft(_tb, xPos);
+                Canvas.SetTop(_tb, yPos);
+
+                _textBlockClockMarkers.Add(_tb);
 
                 //adds the TextBlocks to the canvas as a child element
-                MarkersCanvas.Children.Add(tb);
+                MarkersCanvas.Children.Add(_tb);
             }
-            getBtnList();
         }
+
+
+        private void removesClockMarkers()
+        {
+            foreach (TextBlock b in _textBlockClockMarkers)
+            {
+                MarkersCanvas.Children.Remove(b);
+            }
+        }
+
 
 
         /*Gets the amount of TextBoxes from gamePage and puts them into an array

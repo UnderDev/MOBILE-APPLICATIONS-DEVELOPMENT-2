@@ -11,6 +11,113 @@
     </Page.Resources>
 
     <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup" CurrentStateChanged="VisualStateGroup_CurrentStateChanged" >
+                <VisualState x:Name="Phone">
+                    <VisualState.Setters>
+                        <Setter Target="btnConsonants.(FrameworkElement.Width)" Value="90"/>
+                        <Setter Target="btnConsonants.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnConsonants.(Control.FontSize)" Value="13.333"/>
+                        <Setter Target="btnVowels.(FrameworkElement.Width)" Value="90"/>
+                        <Setter Target="btnVowels.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnVowels.(Control.FontSize)" Value="13.333"/>
+                        <Setter Target="txtBoxUsrWord.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="txtBoxUsrWord.(FrameworkElement.MinHeight)" Value="35"/>
+                        <Setter Target="txtBoxUsrWord.(FrameworkElement.MinWidth)" Value="40"/>
+                        <Setter Target="txtBoxUsrWord.(FrameworkElement.Width)" Value="195"/>
+                        <Setter Target="btnEnterWord.(FrameworkElement.Width)" Value="50"/>
+                        <Setter Target="btnReset.(FrameworkElement.Width)" Value="50"/>
+                        <Setter Target="btnReset.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnEnterWord.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="border.(UIElement.Opacity)" Value="1"/>
+                        <Setter Target="border.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,0.4,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="border.(FrameworkElement.Width)" Value="130"/>
+                        <Setter Target="border.(FrameworkElement.Height)" Value="130"/>
+                        <Setter Target="MarkersCanvas.(FrameworkElement.Width)" Value="125"/>
+                        <Setter Target="MarkersCanvas.(FrameworkElement.Height)" Value="125"/>
+                        <Setter Target="stackPanel.(FrameworkElement.Width)" Value="130"/>
+                        <Setter Target="stackPanel.(FrameworkElement.Height)" Value="130"/>
+                        <Setter Target="clockHand.(FrameworkElement.Height)" Value="55"/>
+                        <Setter Target="clockHand.(FrameworkElement.Width)" Value="10"/>
+                        <Setter Target="clockHand.(Line.Y2)" Value="55"/>
+                        <Setter Target="clockHand1.(Line.Y2)" Value="55"/>
+                        <Setter Target="clockHand1.(FrameworkElement.Height)" Value="65"/>
+                        <Setter Target="clockHand.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>55,8,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="stackPanel1.(FrameworkElement.Width)" Value="130"/>
+                        <Setter Target="stackPanel1.(FrameworkElement.Height)" Value="130"/>
+                        <Setter Target="stackPanel1.(StackPanel.Padding)">
+                            <Setter.Value>
+                                <Thickness>60,0,0,4</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="SpConstVowel.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="btnConsonants.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,130,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="btnLetterBox0.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox0.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox1.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox1.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox2.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox3.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox4.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox5.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox6.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox7.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox8.(FrameworkElement.Width)" Value="30"/>
+                        <Setter Target="btnLetterBox8.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox7.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox6.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox5.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox4.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox3.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="btnLetterBox2.(FrameworkElement.Height)" Value="30"/>
+                        <Setter Target="stkPanContiners.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="SpClock.(FrameworkElement.Width)" Value="130"/>
+                        <Setter Target="SpClock.(FrameworkElement.Height)" Value="130"/>
+                        <Setter Target="SpClock.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>45,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="btnVowels.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,5,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="SpResetEntrWord.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="btnEnterWord.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,10,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="300"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -64,26 +171,26 @@
                 </StackPanel>
 
                 <StackPanel x:Name="SpClock" Width="170" Height="170" Margin="56,0,56,0" Visibility="Visible">
-                    <Border CornerRadius="180" BorderThickness="3" BorderBrush="Black" Width="170" Height="170" Background="LightGray">
+                    <Border x:Name="border" CornerRadius="180" BorderThickness="3" BorderBrush="Black" Width="170" Height="170" Background="LightGray" Opacity="0">
                         <Canvas x:Name="MarkersCanvas" Width="165" Height="165">
-                            <StackPanel Width="170" Height="170" Orientation="Horizontal">
+                            <StackPanel x:Name="stackPanel" Width="170" Height="170" Orientation="Horizontal">
 
                                 <Line x:Name="clockHand" X1="10" Y1="-.5" X2="7" Y2="75" StrokeThickness="1.5" Stroke="Black" RenderTransformOrigin="1,1"  VerticalAlignment="Top" 
-                                      Width="10" Height="75" Margin="73,8,0,0">
+                    				Width="10" Height="75" Margin="73,8,0,0">
                                     <Line.RenderTransform>
                                         <CompositeTransform x:Name="rotate" Rotation="0"/>
                                     </Line.RenderTransform>
                                 </Line>
 
                                 <Line x:Name="clockHand1" X1="-.5" Y1="0" X2="3" Y2="75" StrokeThickness="1.5" Stroke="Black" RenderTransformOrigin="0,1"  VerticalAlignment="Top"
-                                        Width="10" Height="75" Margin="0,8,0,0">
+                    				Width="10" Height="75" Margin="0,8,0,0">
                                     <Line.RenderTransform>
                                         <CompositeTransform x:Name="rotate1" Rotation="0"/>
                                     </Line.RenderTransform>
                                 </Line>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Width="170" Height="170" Padding="78,0,0,4" >
+                            <StackPanel x:Name="stackPanel1" Orientation="Horizontal" Width="170" Height="170" Padding="78,0,0,4" >
                                 <Ellipse x:Name="center" Stroke="Black" Width="10" Height="10" Fill="#FF9A3131" />
                             </StackPanel>
 
@@ -104,7 +211,7 @@
                 <Button x:Name="btnLetterBox7" Height="50" Width="50" FontSize="20" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" FontFamily="Stencil" Background="{x:Null}" Foreground="#FF752F4B"  Style="{StaticResource LetterNumButtons}"/>
                 <Button x:Name="btnLetterBox8" Height="50" Width="50" FontSize="20" Margin="0,0,5,0" Click="LetterBtn_Click" IsEnabled="False" FontFamily="Stencil" Background="{x:Null}" Foreground="#FF752F4B"  Style="{StaticResource LetterNumButtons}"/>
             </StackPanel>
-                              
+
 
             <StackPanel Name="SpResultsLayout" Visibility="Collapsed">
                 <TextBlock Name="WordNotFoundTxtBox" FontSize="20" Text="" TextAlignment="Center" FontWeight="Bold" Foreground="#FFF0EAEA" Margin="0,100,0,10" />

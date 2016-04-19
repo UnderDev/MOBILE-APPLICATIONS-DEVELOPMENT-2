@@ -80,6 +80,39 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Desktop">
+                    <VisualState.Setters>
+                        <Setter Target="btnSinglePlayer0.(FrameworkElement.Width)" Value="388"/>
+                        <Setter Target="btnScoreBoard1.(FrameworkElement.Width)" Value="391"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.Setters>
+                        <Setter Target="btnSinglePlayer0.(FrameworkElement.Width)" Value="356"/>
+                        <Setter Target="btnScoreBoard1.(FrameworkElement.Width)" Value="356"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Phone">
+                    <VisualState.Setters>
+                        <Setter Target="btnSinglePlayer0.(FrameworkElement.Width)" Value="250"/>
+                        <Setter Target="btnScoreBoard1.(FrameworkElement.Width)" Value="250"/>
+                        <Setter Target="btnSinglePlayer0.(Control.FontSize)" Value="29.333"/>
+                        <Setter Target="btnScoreBoard1.(Control.FontSize)" Value="29.333"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="300"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="6*"></RowDefinition>
@@ -92,7 +125,8 @@
             <ColumnDefinition Width=".5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center">
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" VerticalAlignment="Center">
             <Image  x:Name="imgCountDownLogo"
                     Source="Assets/CountDownBg.jpg"
                     Width="Auto"
@@ -101,8 +135,8 @@
                     Visibility="Visible"/>
         </StackPanel>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Image x:Name="animatedImage" Stretch="Fill" Opacity="0" Visibility="Visible" Source="Assets/CountDownLogo.png" Margin="250,150,250,150"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"  >
+            <Image x:Name="animatedImage" Stretch="Fill" Opacity="0" Visibility="Visible" Source="Assets/CountDownLogo.png" />
         </StackPanel>
 
         <StackPanel>
@@ -120,13 +154,14 @@
         </StackPanel>
 
 
+
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"  Visibility="Visible">
 
             <Button x:Name="btnSinglePlayer0" Content="Play" Click="MenuChoice_Click" FontSize="35" Foreground="White"
-                    Width="330" FontFamily="Stencil Std" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}" />
+                     FontFamily="Stencil Std" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}" />
 
             <Button x:Name="btnScoreBoard1" Content="ScoreBoard" Click="MenuChoice_Click" FontSize="35" Foreground="White"
-                    Width="330" FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}" />
+                    FontFamily="Stencil Std" Margin="0,20,0,0" Padding="0,20,0,0" Background="{x:Null}" Style="{StaticResource MenuStyle}"  />
         </StackPanel>
 
     </Grid>
