@@ -9,6 +9,30 @@
 
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Phone">
+                    <VisualState.Setters>
+                        <Setter Target="textBox.(FrameworkElement.Width)" Value="300"/>
+                        <Setter Target="SpQuit.(FrameworkElement.Width)" Value="300"/>
+                        <Setter Target="BtnQuit.(FrameworkElement.Width)" Value="300"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="300"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition Height="7*"></RowDefinition>
@@ -32,11 +56,11 @@
 
 
         <StackPanel Name="SpScoreBoardContent" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"  Visibility="Visible" Margin="0,0,0,0" BorderBrush="Black" BorderThickness="2">
-            <TextBox TextWrapping="Wrap" Height="45" Width="400" TextAlignment="Center" Text="Score Board" Style="{StaticResource ScoreBoardHeader}" Foreground="{x:Null}" IsReadOnly="True" Padding="0"/>
+            <TextBox x:Name="textBox" TextWrapping="Wrap" Height="45" Width="400" TextAlignment="Center" Text="Score Board" Style="{StaticResource ScoreBoardHeader}" Foreground="{x:Null}" IsReadOnly="True" Padding="0"/>
             <StackPanel x:Name="SPScoreBoard" Orientation="Vertical">
                 <!--TextBoxes get added here at Runtime containing read in contents from local storage-->
             </StackPanel>
-            
+
             <StackPanel Name="SpQuit" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical"  Visibility="Visible" >
                 <Button Name="BtnQuit" Height="30" Width="400" Content="Return To Menu" FontWeight="Bold"  Margin="0,5,0,0" BorderThickness="0,2,0,0" Click="BtnQuit_Click" />
             </StackPanel>

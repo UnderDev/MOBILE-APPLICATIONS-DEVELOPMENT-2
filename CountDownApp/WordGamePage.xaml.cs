@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Windows.Foundation;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -27,36 +28,48 @@ namespace CountDownApp
         private int _countTicks = 28;
         private Boolean _timesUp = false;
         private double _radius = 75;
+        private double _btnWidth, _btnfontSize;
         TextBlock _tb;
-
 
 
         public WordGamePage()
         {
             this.InitializeComponent();
 
-            //Set up the clock
-           // setClockMarkers();  /////////////////////////////************************************** fix
+            //gets the current state the program is currently in
+            getCurrentStateSetup(VisualStateGroup.CurrentState.Name);
             getBtnList();
         }
 
 
-        private void VisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
-        {
-            var stateName = e.NewState.Name;
+       
+        private void getCurrentStateSetup(string stateName) { 
 
             switch (stateName)
             {
                 case "Phone":
                     _radius = 55;
+                    _btnWidth = 150;
+                    _btnfontSize = 10;
                     break;
                 case "Desktop":
+                    _radius = 75;
+                    _btnWidth = 215;
+                    _btnfontSize = 13;
                     break;
                 case "Tablet":
+                    _radius = 75;
+                    _btnWidth = 215;
+                    _btnfontSize = 13;
                     break;
             }
             removesClockMarkers();
             setClockMarkers();
+        }
+
+        private void VisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            getCurrentStateSetup(VisualStateGroup.CurrentState.Name);
         }
 
 
@@ -375,8 +388,8 @@ namespace CountDownApp
         {
             Button btnWord = new Button();
             btnWord.Height = 30;
-            btnWord.FontSize = 13;
-            btnWord.Width = 215;
+            btnWord.FontSize = _btnfontSize;
+            btnWord.Width = _btnWidth;
             btnWord.Margin = new Thickness(0, 0, 0, 5);
             btnWord.Name = "word" + _btnWordIndex++;
             btnWord.Click += BtnWord_Click;
@@ -418,6 +431,9 @@ namespace CountDownApp
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+
+
 
         /*Navigate to The numbers game page
         */

@@ -9,6 +9,145 @@
     <Page.Resources>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Phone">
+                    <VisualState.Setters>
+                        <Setter Target="txtBoxTotal.(FrameworkElement.Width)" Value="130"/>
+                        <Setter Target="txtBoxTotal.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="txtBoxTotal.(Control.FontSize)" Value="18.667"/>
+                        <Setter Target="txtBoxTarget.(FrameworkElement.Width)" Value="130"/>
+                        <Setter Target="txtBoxTarget.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="txtBoxTarget.(Control.FontSize)" Value="18.667"/>
+                        <Setter Target="btnNumBox0.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnNumBox0.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnNumBox1.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnNumBox1.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnNumBox2.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnNumBox2.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnNumBox3.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnNumBox3.(Control.BorderThickness)">
+                            <Setter.Value>
+                                <Thickness>2</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="btnNumBox3.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnNumBox4.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnNumBox4.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnNumBox5.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnNumBox5.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="stkPanNum.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Width)" Value="100"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnSmallNum.(FrameworkElement.Width)" Value="100"/>
+                        <Setter Target="btnSmallNum.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="stkPanNumBtns.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="btnLargeNum.(Control.FontSize)" Value="16"/>
+                        <Setter Target="btnSmallNum.(Control.FontSize)" Value="16"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,70,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="btnSmallNum.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="btnOpBox0.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnOpBox0.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnOpBox1.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnOpBox1.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnOpBox2.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="btnOpBox2.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnOpBox3.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnOpBox3.(FrameworkElement.Width)" Value="40"/>
+                        <Setter Target="stkPanOperators.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="stackPanel.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="btnReset.(FrameworkElement.Width)" Value="85"/>
+                        <Setter Target="btnReset.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnReset.(Control.FontSize)" Value="17.333"/>
+                        <Setter Target="stackPanel1.(FrameworkElement.Width)" Value="130"/>
+                        <Setter Target="stackPanel2.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="txtBoxTotal.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                        <Setter Target="txtBoxMathTotals.(Control.FontSize)" Value="13.333"/>
+                        <Setter Target="txtBoxMathsSigns.(Control.FontSize)" Value="13.333"/>
+                        <Setter Target="txtBoxMathsNum.(Control.FontSize)" Value="13.333"/>
+                        <Setter Target="txtBoxMathsEquals.(Control.FontSize)" Value="13.333"/>
+                        <Setter Target="txtBoxMathTotal.(Control.FontSize)" Value="13.333"/>
+                        <Setter Target="txtBoxMathTotals.(FrameworkElement.Width)" Value="35"/>
+                        <Setter Target="txtBoxMathsSigns.(FrameworkElement.Width)" Value="15"/>
+                        <Setter Target="txtBoxMathsNum.(FrameworkElement.Width)" Value="25"/>
+                        <Setter Target="txtBoxMathsEquals.(FrameworkElement.Width)" Value="15"/>
+                        <Setter Target="txtBoxMathTotal.(FrameworkElement.Width)" Value="45"/>
+                        <Setter Target="txtBoxTotal.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,5,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="stackPanel3.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>10,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtBoxTarget.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,5,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="BtnResults.(FrameworkElement.Width)" Value="270"/>
+                        <Setter Target="BtnResults.(FrameworkElement.HorizontalAlignment)" Value="Center"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="300"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.Setters>
+                        <Setter Target="txtBoxTarget.(FrameworkElement.Width)" Value="188"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Width)" Value="150"/>
+                        <Setter Target="btnSmallNum.(FrameworkElement.Width)" Value="150"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnSmallNum.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,85,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtBoxTotal.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,5,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Target="txtBoxTarget.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,5,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Tablet">
+                    <VisualState.Setters>
+                        <Setter Target="txtBoxTarget.(FrameworkElement.Width)" Value="188"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Width)" Value="150"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnSmallNum.(FrameworkElement.Width)" Value="150"/>
+                        <Setter Target="btnSmallNum.(FrameworkElement.Height)" Value="40"/>
+                        <Setter Target="btnLargeNum.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>0,0,85,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -44,9 +183,9 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="10" Grid.RowSpan="6" VerticalAlignment="Center" HorizontalAlignment="Center" Width="385" Height="370">
 
             <StackPanel Name="SpLayout" Visibility="Visible">
-                <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Visibility="Visible">
+                <StackPanel x:Name="stackPanel2" Margin="0,0,0,5" Orientation="Horizontal" Visibility="Visible">
                     <StackPanel>
-                        <StackPanel Orientation="Horizontal" >
+                        <StackPanel x:Name="stackPanel1" Orientation="Horizontal" >
                             <TextBox x:Name="txtBoxMathTotals" TextWrapping="Wrap" Width="58" Height="140" 
                      IsReadOnly="True" IsEnabled="False" FontSize="15" Padding="0,10,0,0"  Background="#FFD1D1D1" TextAlignment="Center" BorderThickness="2,2,0,2" MinWidth="0" MinHeight="0" FontWeight="Bold"/>
 
@@ -67,7 +206,7 @@
                      IsReadOnly="True" IsEnabled="False" FontSize="35" Text="Total" Style="{StaticResource TotTarBoxStyle}"/>
                     </StackPanel>
 
-                    <StackPanel Margin="5,0,0,0"  >
+                    <StackPanel x:Name="stackPanel3" Margin="5,0,0,0"  >
                         <StackPanel Margin="0,0,0,10" >
                             <Border CornerRadius="180" BorderThickness="3" BorderBrush="Black" Background="LightGray" Width="130" Height="130">
                                 <Canvas x:Name="MarkersCanvas" Width="130" Height="130" >
@@ -122,7 +261,7 @@
                     <Button x:Name="btnNumBox5" Height="50" Width="60" FontSize="20"                  Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Style="{StaticResource LetterNumButtons}"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <StackPanel x:Name="stackPanel" Orientation="Horizontal" Margin="0,5,0,0">
                     <StackPanel x:Name="stkPanOperators" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed" Margin="0,0,0,5">
                         <Button x:Name="btnOpBox0" Height="50" Width="60" FontSize="25" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Content="+" Style="{StaticResource LetterNumButtons}"/>
                         <Button x:Name="btnOpBox1" Height="50" Width="60" FontSize="25" Margin="0,0,5,0" Click="AddBtnContToTxtBox_Click" IsEnabled="False" FontFamily="Stencil" Content="-" Style="{StaticResource LetterNumButtons}"/>

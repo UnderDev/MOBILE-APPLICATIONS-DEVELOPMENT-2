@@ -45,7 +45,7 @@
                         <Setter Target="clockHand.(FrameworkElement.Width)" Value="10"/>
                         <Setter Target="clockHand.(Line.Y2)" Value="55"/>
                         <Setter Target="clockHand1.(Line.Y2)" Value="55"/>
-                        <Setter Target="clockHand1.(FrameworkElement.Height)" Value="65"/>
+                        <Setter Target="clockHand1.(FrameworkElement.Height)" Value="55"/>
                         <Setter Target="clockHand.(FrameworkElement.Margin)">
                             <Setter.Value>
                                 <Thickness>55,8,0,0</Thickness>
@@ -87,7 +87,7 @@
                         <Setter Target="SpClock.(FrameworkElement.Height)" Value="130"/>
                         <Setter Target="SpClock.(FrameworkElement.Margin)">
                             <Setter.Value>
-                                <Thickness>45,0</Thickness>
+                                <Thickness>10,0</Thickness>
                             </Setter.Value>
                         </Setter>
                         <Setter Target="btnVowels.(FrameworkElement.Margin)">
@@ -101,6 +101,8 @@
                                 <Thickness>0,0,10,0</Thickness>
                             </Setter.Value>
                         </Setter>
+                        <Setter Target="clockHand.(Line.X2)" Value="7"/>
+                        <Setter Target="clockHand.(Line.Y1)" Value="-20"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="300"/>
@@ -167,7 +169,7 @@
             <StackPanel Margin="0,0,0,5" Orientation="Horizontal" HorizontalAlignment="Center">
 
                 <StackPanel Name="UsersWordsList" Orientation="Vertical" Visibility="Collapsed" MaxHeight="200" MaxWidth="215" Margin="0,0,0,0">
-                    <!--Buttons get generated here at runtime with the users words-->
+                    <!--Buttons get generated here at runtime with the users words-->                    
                 </StackPanel>
 
                 <StackPanel x:Name="SpClock" Width="170" Height="170" Margin="56,0,56,0" Visibility="Visible">
@@ -214,7 +216,7 @@
 
 
             <StackPanel Name="SpResultsLayout" Visibility="Collapsed">
-                <TextBlock Name="WordNotFoundTxtBox" FontSize="20" Text="" TextAlignment="Center" FontWeight="Bold" Foreground="#FFF0EAEA" Margin="0,100,0,10" />
+                <TextBlock Name="WordNotFoundTxtBox" FontSize="10" Text="" TextAlignment="Center" FontWeight="Bold" Foreground="#FFF0EAEA" Margin="0,100,0,10" />
 
                 <StackPanel x:Name="SPScores" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center"  Margin="0,0,0,10"  Width="150" BorderThickness="2" BorderBrush="Black" Background="#FFBFBFBF" CornerRadius="3" >
 

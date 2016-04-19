@@ -32,6 +32,7 @@ namespace CountDownApp
         private List<Button> _tempNumBtnAvail = new List<Button>();
         private List<Button> _btnNumLst = new List<Button>();
         private List<Button> _btnOpLst = new List<Button>();
+        private List<TextBlock> _textBlockClockMarkers = new List<TextBlock>();
 
         private int _rndNum = 0, _btnLoc = 0, _cntPlys = 0, _currTotal = 0, _curNum = 0, _targetNum = 0;
 
@@ -39,6 +40,9 @@ namespace CountDownApp
 
         private DispatcherTimer _countDownTimer = new DispatcherTimer();
         private int _countTicks = 28;
+        private double _radius = 75;
+        TextBlock _tb;
+
 
         public NumberGamePage()
         {
@@ -54,9 +58,80 @@ namespace CountDownApp
             _tempLrgNumLst = new List<int>(_largeNumLst);
             _tempSmlNumLst = new List<int>(_smallNumLst);
 
+
+            //gets the current state the program is currently in
+            getCurrentStateSetup(VisualStateGroup.CurrentState.Name);
+        }
+
+
+        private void getCurrentStateSetup(string stateName)
+        {
+
+            switch (stateName)
+            {
+                case "Phone":
+                    _radius = 55;
+                    break;
+                case "Desktop":
+                    _radius = 75;
+                    break;
+                case "Tablet":
+                    _radius = 75;
+                    break;
+            }
+            removesClockMarkers();
             setClockMarkers();
         }
 
+        private void VisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            getCurrentStateSetup(VisualStateGroup.CurrentState.Name);
+        }
+
+
+        /*Sets up the Clocks Markers(numbers) at runTime into TextBlocks
+      */
+        private void setClockMarkers()
+        {
+            int num = 5;//Increment in 5s
+            for (int i = 1; i <= 12; ++i)
+            {
+                _tb = new TextBlock();
+                _tb.Text = num.ToString();
+
+                _tb.TextAlignment = TextAlignment.Center;
+                _tb.RenderTransformOrigin = new Point(1, 1);
+                _tb.FontSize = 10;
+                _tb.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Red);
+
+                //sets the Number output to the textblocks in incriments of 5
+                num += 5;
+
+                //Sets the spacing between each of the numbers
+                double angle = Math.PI * i * 30.0 / 180.0;
+
+                //sets the x and y positions of the Circle on the canvas
+                double xPos = Math.Sin(angle) * _radius + _radius;
+                double yPos = -Math.Cos(angle) * _radius + _radius; //-Math.Cos important
+
+                Canvas.SetLeft(_tb, xPos);
+                Canvas.SetTop(_tb, yPos);
+
+                _textBlockClockMarkers.Add(_tb);
+
+                //adds the TextBlocks to the canvas as a child element
+                MarkersCanvas.Children.Add(_tb);
+            }
+        }
+
+
+        private void removesClockMarkers()
+        {
+            foreach (TextBlock b in _textBlockClockMarkers)
+            {
+                MarkersCanvas.Children.Remove(b);
+            }
+        }
 
         /* Get all the child buttons In stkPanNum and stkPanOperators
         * and add them to a List<Buttons>
@@ -397,42 +472,6 @@ namespace CountDownApp
             }
         }
 
-        /*Sets up the Clocks Markers(numbers) at runTime into TextBlocks
-        */
-        private void setClockMarkers()
-        {
-            int num = 5;//Increment in 5s
-
-            for (int i = 1; i <= 12; ++i)
-            {
-                TextBlock tb = new TextBlock();
-
-                tb.Text = num.ToString();
-
-                tb.TextAlignment = TextAlignment.Center;
-                tb.RenderTransformOrigin = new Point(1, 1);
-                tb.FontSize = 10;
-                tb.Foreground = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Red);
-
-                //sets the Number output to the textblocks in incriments of 5
-                num += 5;
-
-                double radius = 55;
-
-                //Sets the spacing between each of the numbers
-                double angle = Math.PI * i * 30.0 / 180.0;
-
-                //sets the x and y positions of the Circle on the canvas
-                double xPos = Math.Sin(angle) * radius + radius;
-                double yPos = -Math.Cos(angle) * radius + radius; //-Math.Cos important
-
-                Canvas.SetLeft(tb, xPos);
-                Canvas.SetTop(tb, yPos);
-
-                //adds the TextBlocks to the canvas as a child element
-                MarkersCanvas.Children.Add(tb);
-            }
-        }
 
         /*Navigates the use to another page
         */
